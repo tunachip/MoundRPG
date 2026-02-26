@@ -1,0 +1,37 @@
+# Basic Water Attack
+name: Ice Out
+type: Attack
+element: Water
+canChain: true
+canBeChained: true
+
+logic:
+  fromBanked:
+    - ActivateMove:
+      target: Self
+      ignoreBind: false
+    - AttuneTo:
+      target: Caster
+      element: Meta
+  fromActive:
+    - RevealMove:
+      target: Self
+    - AttuneTo:
+      target: Caster
+      element: Meta
+    - Loop:
+      iterations: 1
+      operations:
+        - SetVar:
+          varKey: cooldownCount
+          value: {
+            2 * Math.max{caster['movesOnCooldown'], 2} +
+            2 * Math.max{caster['blessingsOnCooldown'], 2}
+          }
+        - Attack:
+          target: Enemy
+          damage: 1 + cooldownCount
+          element: Water
+        - ApplyCooldown:
+          target: self
+          amount: 1

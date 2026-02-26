@@ -1,0 +1,26 @@
+# Basic Water Utility
+name: Mistify
+type: Utility
+element: Water
+canChain: true
+canBeChained: true
+
+logic:
+  fromBanked:
+    - ActivateMove:
+      target: self
+      ignoreBind: false
+  fromActive:
+    - RevealMove:
+      target: self
+    - ApplyCooldown
+      target: self
+      amount: 2
+  whileOnCooldown:
+    when: OwnerAttacked
+    do:
+      - SetVar:
+        varKey: dodgeChance
+        value: caster['turnsAttuned'][self.element] * 0.25
+      - TryDodge:
+        chance: dodgeChance

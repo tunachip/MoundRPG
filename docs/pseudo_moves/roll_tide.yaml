@@ -1,0 +1,28 @@
+# Basic Water Attack
+name: Roll Tide
+type: Attack
+element: Water
+canChain: true
+canBeChained: true
+
+logic:
+  fromBanked:
+    - ActivateMove:
+      target: Self
+      ignoreBind: false
+    - AttuneTo:
+      target: Caster
+      element: Meta
+  fromActive:
+    - RevealMove:
+      target: Self
+    - AttuneTo:
+      target: Caster
+      element: Meta
+    - Loop:
+      iterations: 1
+      operations:
+        - Attack:
+          target: Enemy
+          damage: 2
+          element: Water

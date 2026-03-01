@@ -9,40 +9,41 @@ import { AttunementState, AttunementTurns } from './attunement.ts';
 import { OperationContext } from './operation.ts';
 
 export interface EntityData {
-	name:	string;
-	level: number;
-	culture: EntityCulture;
+	name:				string;
+	level:			number;
+	culture:		EntityCulture;
 	entityType:	EntityType;
-	hp:	number;
-	maxHp: number;
-	energy:	number;
-	maxEnergy: number;
-	moves: Array<MoveData>;
-	blessings: Array<BlessingData>;
-	currency: number;
-	inventory: Inventory;
+	hp:					number;
+	maxHp:			number;
+	energy:			number;
+	maxEnergy:	number;
+	moves:			Array<MoveData>;
+	blessings:	Array<BlessingData>;
+	currency:		number;
+	inventory:  Inventory;
 }
 
 export interface CombatEntity {
-	name: string;
-	level: number;
-	culture: EntityCulture;
-	entityType: EntityType;
-	hp: number;
-	maxHp: number;
-	energy: number;
-	maxEnergy: number;
-	curseRisk: number;
-	attunedTo: AttunementState;
-	turnsAttuned: AttunementTurns;
-	hasStatus: StatusState;
-	statusTurns: StatusTurns;
-	maxStatusTurns: StatusTurns;
-	immuneToStatus: StatusState;
-	maxDamageTaken: number;
-	lastDamageTaken: number;
+	name:							string;
+	level:						number;
+	culture:					EntityCulture;
+	entityType:				EntityType;
+	hp:								number;
+	maxHp:						number;
+	energy:						number;
+	maxEnergy:				number;
+	curseRisk:				number;
+	attunedTo:				AttunementState;
+	turnsAttuned:			AttunementTurns;
+	hasStatus:				StatusState;
+	statusTurns:			StatusTurns;
+	maxStatusTurns:		StatusTurns;
+	immuneToStatus:		StatusState;
+	maxDamageTaken:		number;
+	lastDamageTaken:	number;
 	totalDamageTaken: number;
-	ownedMoves: Array<number>;
-	ownedBlessings: Array<number>;
+	ownedMoves:				Array<number>;
+	ownedBlessings:		Array<number>;
 }
+
 

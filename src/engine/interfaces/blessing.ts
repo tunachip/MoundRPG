@@ -8,11 +8,12 @@ export interface BlessingData extends ItemData {
 }
 
 export interface CombatBlessing {
-	name: string;
-	ownerIndex: number;
-	eventTrigger: EventTrigger;
-	conditions: Array<Condition>;
-	isActive: boolean;
-	cooldownTurns: number;
+	name:									string;
+	ownerIndex:						number;
+	eventTrigger:					EventTrigger;
+	conditions:						Array<Condition>;
+	isActive:							boolean;
+	cooldownTurns:				number;
+	ownedListenerIndexes: Array<number>;
 }
 

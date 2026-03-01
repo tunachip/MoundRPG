@@ -2,7 +2,6 @@
 
 
 // === Element ==================================
-
 export const GameElements = [
 	'water',
 	'stone',
@@ -14,7 +13,6 @@ export const GameElements = [
 ] as const;
 
 // === Status ===================================
-
 export const Statuses = [
 	'burn',
 	'decay',
@@ -31,7 +29,6 @@ export const Statuses = [
 ] as const;
 
 // === Entity ===================================
-
 export const EntityTypes = [
 	'player',
 	'encounter',
@@ -47,7 +44,6 @@ export const EntityCultures = [
 ] as const;
 
 // === Move =====================================
-
 export const MoveTypes = [
 	'attack',
 	'utility',
@@ -60,7 +56,6 @@ export const MoveSpeeds = [
 ] as const;
 
 // === Item =====================================
-
 export const ItemTypes = [
 	'blessing',
 	'fragment',
@@ -68,15 +63,22 @@ export const ItemTypes = [
 ] as const;
 
 // === Target ===================================
-
 export const TargetTypes = [
 	'entity',
 	'move',
 	'blessing',
 ] as const;
 
-// === Event ====================================
+// === Listener =================================
+export const ListenerSourceTypes = [
+	'entity',
+	'move',
+	'blessing',
+	'listener',
+	'system'
+] as const;
 
+// === Event ====================================
 export const EventTriggers = [
 	'combat-match start',
 	'combat-match end',
@@ -122,5 +124,4 @@ export const EventTriggers = [
 	'blessing revealed',
 	'blessing hidden',
 ] as const;
-
 

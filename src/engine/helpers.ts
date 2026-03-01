@@ -19,3 +19,14 @@ export function minClamped (
 	const extra = total - min;
 	return [Math.min(min, total), extra];
 }
+
+export function keyMap <K extends readonly string[], V> (
+	keys: K,
+	initialValue: V
+): { [P in K[number]]: V } {
+	return keys.reduce((state, key) => {
+		state[key] = initialValue;
+		return state;
+	}, {} as { [P in K[number]]: V });
+}
+

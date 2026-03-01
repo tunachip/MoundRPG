@@ -1,7 +1,7 @@
 // src/engine/interfaces/item.ts
 
 export interface ItemData {
-	templateId: number;
+	templateId:  number;
 	isExhausted: boolean;
 }
 

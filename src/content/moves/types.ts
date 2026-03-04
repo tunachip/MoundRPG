@@ -21,7 +21,7 @@ interface OperationDefintionArgs {
 	baseIterations?: 'meta' | number;
 }
 
-interface OperationDefinition {
+export interface OperationDefinition {
 	operation: OpCode;
 	args: OperationDefintionArgs;
 }
@@ -30,13 +30,13 @@ interface ConditionDefinitionArgs {
 
 }
 
-interface ConditionDefinition {
+export interface ConditionDefinition {
 	name: string;
 	args: Array<ConditionDefinitionArgs>;
 	expects: any;
 }
 
-interface TriggeredOperationsDefinition {
+export interface TriggeredOperationsDefinition {
 	trigger: EventTrigger;
 	conditions?: Array<ConditionDefinition>;
 	operations: Array<OperationDefinition>;

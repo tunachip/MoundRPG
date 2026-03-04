@@ -2,7 +2,7 @@
 
 import { CombatState, CombatEntity, CombatBlessing, CombatMove } from './';
 import { Entity, Move, Blessing } from '../../actor';
-import { Listener, createListener, registerListners } from '../listener';
+import { Listener, createListener, registerListeners } from '../listener';
 
 interface CombatMoves {
 	moves: Array<CombatMove>;

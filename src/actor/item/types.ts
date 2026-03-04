@@ -2,6 +2,7 @@
 
 export interface Item {
 	name: string;
+	definitionId: number;
 	isExhausted: boolean;
 }
 
@@ -10,6 +11,3 @@ export interface Inventory {
 	xp: number;
 }
 
-export interface ItemDefinition {
-
-}

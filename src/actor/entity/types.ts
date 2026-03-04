@@ -17,8 +17,6 @@ export interface Entity {
 	moves:		 Array<Move>;
 	blessings: Array<Blessing>;
 	inventory: Inventory;
+	definitionId?: number;
 }
 
-export interface EntityDefinition {
-
-}

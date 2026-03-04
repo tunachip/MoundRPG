@@ -93,6 +93,9 @@ export const EventTriggers = [
 	'post:entity:death',
 	'post:entity:fullHeal',
 	'post:entity:attunementBlock',
+	// turn-phase pre-triggers
+	// format: 'pre:phase'
+	'pre:executeTurn',
 ] as const;
 
 export const ActionTypes = [
@@ -103,6 +106,9 @@ export const ActionTypes = [
 
 export const OpCodes = [
 	'attack',
+	'heal',
+	'raiseMaxHp',
+	'lowerMaxHp',
 	'applyAttunement',
 	'negateAttunement',
 	'spendAttunement',

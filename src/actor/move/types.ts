@@ -2,14 +2,12 @@
 
 export interface Fragment {
 	name: string;
+	definitionId: number;
 }
 
 export interface Move {
-	id: string;
-	maxFragments: number;
+	name: string;
+	definitionId: number;
 	fragments: Array<Fragment>;
-}
-
-export interface MoveDefinition {
-
+	maxFragments: number;
 }

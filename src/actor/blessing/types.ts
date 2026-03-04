@@ -1,11 +1,7 @@
 // src/actor/blessing/types.ts
 
-import { Item } from '../item';
-
-export interface Blessing extends Item {
-}
-
-export interface BlessingDefinition {
+export interface Blessing {
 	name: string;
-
+	definitionId: number;
 }
+

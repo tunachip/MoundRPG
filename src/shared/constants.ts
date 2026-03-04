@@ -68,6 +68,8 @@ export const EventTriggers = [
 	'pre:entity:attunementBlock',
 	'pre:entity:fullHeal',
 	'pre:entity:attacked',
+	'pre:move:leaveCooldown',
+	'pre:move:enterCooldown',
 	// side effects triggers
 	// format: 'actor:field:change'
 	'entity:hp:gained',
@@ -86,6 +88,8 @@ export const EventTriggers = [
 	'entity:maxStatusTurns:lowered',
 	'entity:curseRisk:gained',
 	'entity:curseRisk:lost',
+	'move:cooldown:gained',
+	'move:cooldown:lost',
 	'listener:activated',
 	'listener:deactivated',
 	// post-event triggers
@@ -93,6 +97,8 @@ export const EventTriggers = [
 	'post:entity:death',
 	'post:entity:fullHeal',
 	'post:entity:attunementBlock',
+	'post:move:leaveCooldown',
+	'post:move:enterCooldown',
 	// turn-phase pre-triggers
 	// format: 'pre:phase'
 	'pre:executeTurn',

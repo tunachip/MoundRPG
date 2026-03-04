@@ -4,10 +4,18 @@ import sys
 def main(name):
 	return f'''
 export function {name} (
-	args: OperationContext
+	ctx: OperationContext
 ): OperationResult {{
     const result: OperationResult = {{ breaks: false }};
 
+    forEachTargetEntity(ctx, (target, targetActor) => {{
+
+        result.triggers ??= [];
+        result.triggers.push({{
+            trigger: '',
+            actors: [targretActor],
+        }});
+    }});
     return result;
 }}'''
 

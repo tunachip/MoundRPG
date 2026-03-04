@@ -1,6 +1,6 @@
 // src/combat/operation/listener.ts
 
-import { OperationContext, OperationResult } from './';
+import type { OperationContext, OperationResult } from './types.ts';
 import { forEachTargetListener } from './helpers.ts';
 
 export function activateListeners (

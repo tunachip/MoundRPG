@@ -1,8 +1,8 @@
 // src/combat/listener/types.ts
 
-import { ActorType, EventTrigger } from '../../shared';
-import { OperationMatrix } from '../operation';
-import { Condition } from '../condition';
+import type { ActorType, EventTrigger } from '../../shared/types.ts';
+import type { OperationMatrix } from '../operation/types.ts';
+import type { Condition } from '../condition/types.ts';
 
 export interface ListenerContext {
 	name: string;

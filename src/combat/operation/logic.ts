@@ -1,7 +1,7 @@
 // src/combat/operation/logic.ts
 
-import { Operation, OperationContext, OperationResult } from './';
-import { Condition } from '../condition';
+import type { Operation, OperationResult } from './types.ts';
+import type { Condition } from '../condition/types.ts';
 
 export function loopOperations (
 	operations: Array<Operation>,
@@ -44,4 +44,3 @@ export function conditionalOperations (
 	//
 	return result;
 }
-

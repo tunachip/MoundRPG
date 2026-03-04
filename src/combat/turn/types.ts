@@ -1,7 +1,7 @@
 // src/combat/turn/types.ts
 
-import { Actor } from '../../actor';
-import { ActionType } from '../../shared';
+import type { Actor } from '../../actor/types.ts';
+import type { ActionType } from '../../shared/types.ts';
 
 export interface DeclaredAction {
 	type: ActionType;
@@ -10,4 +10,3 @@ export interface DeclaredAction {
 	targets: Array<Actor>;
 	chainIndex: number;
 }
-

@@ -1,6 +1,6 @@
 // src/content/fragments/07_thunder_fragment.ts
 
-import { FragmentDefinition } from './';
+import type { FragmentDefinition } from './index.ts';
 
 export const ThunderFragment: FragmentDefinition = {
 	name: 'Thunder Fragment',

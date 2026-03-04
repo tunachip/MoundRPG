@@ -1,6 +1,6 @@
 // src/combat/ai/types.ts
 
-import { Temperament } from '../../content/encounters/index.ts';
+import type { Temperament } from '../../content/encounters/types.ts';
 
 export interface CombatAiProfile {
 	temperament: Temperament;

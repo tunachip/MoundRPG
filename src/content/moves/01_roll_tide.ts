@@ -1,6 +1,6 @@
 // src/content/moves/01_roll_tide.ts
 
-import { MoveDefinition } from './';
+import type { MoveDefinition } from './index.ts';
 
 export const RollTide: MoveDefinition = {
 	name: 'Roll Tide',

@@ -1,7 +1,8 @@
 // src/world/encounters.ts
 
-import { Entity } from '../actor/index.ts';
-import { EncounterDefinition, getEncounterDefinition } from '../content/encounters/index.ts';
+import type { Entity } from '../actor/entity/types.ts';
+import type { EncounterDefinition } from '../content/encounters/index.ts';
+import { getEncounterDefinition } from '../content/encounters/index.ts';
 
 export function createEncounterEntity (
 	definitionId: number

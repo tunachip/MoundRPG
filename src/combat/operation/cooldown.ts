@@ -1,6 +1,6 @@
 // src/combat/operation/cooldown.ts
 
-import { OperationContext, OperationResult } from './';
+import type { OperationContext, OperationResult } from './types.ts';
 import { forEachTargetMove, requireCtxAmount } from './helpers.ts';
 
 export function applyCooldown (

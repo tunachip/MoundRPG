@@ -1,8 +1,8 @@
 // src/combat/listener/constructor.ts
 
-import { Actor } from '../../actor';
-import { CombatState } from '../state';
-import { Listener, ListenerContext } from './types.ts';
+import type { Actor } from '../../actor/types.ts';
+import type { CombatState } from '../state/index.ts';
+import type { Listener, ListenerContext } from './types.ts';
 
 export function createListener (
 	ctx: ListenerContext

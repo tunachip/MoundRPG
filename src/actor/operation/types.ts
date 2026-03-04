@@ -1,8 +1,8 @@
 // src/actor/operation/types.ts
 
-import { CombatState } from '../../combat/state';
-import { DamageElement, Status } from '../../shared';
-import { Actor } from '../';
+import type { CombatState } from '../../combat/state/index.ts';
+import type { DamageElement, Status } from '../../shared/types.ts';
+import type { Actor } from '../types.ts';
 
 export interface Operation {
 	name: string;
@@ -19,4 +19,3 @@ export interface OperationContext {
 	baseDamage?: number;
 	calculatedDamage?: number;
 }
-

@@ -1,7 +1,8 @@
 // src/content/encounters/types.ts
 
-import { Culture } from '../../shared/index.ts';
-import { Move, Blessing } from '../../actor/index.ts';
+import type { Culture } from '../../shared/types.ts';
+import type { Move } from '../../actor/move/types.ts';
+import type { Blessing } from '../../actor/blessing/types.ts';
 
 export const Temperaments = [
 	'normal',

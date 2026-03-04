@@ -1,7 +1,7 @@
 // src/content/fragments/types.ts
 
-import { DamageElement, Speed } from '../../shared';
-import { OperationDefinition, TriggeredOperationsDefinition } from '../moves';
+import type { DamageElement, Speed } from '../../shared/types.ts';
+import type { OperationDefinition, TriggeredOperationsDefinition } from '../moves/index.ts';
 
 interface OperationUpdates {
 	when: string;

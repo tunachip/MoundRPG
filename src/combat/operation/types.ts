@@ -1,10 +1,10 @@
 // src/combat/operation/types.ts
 
-import { CombatState } from '../state';
-import { DamageElement, Status, EventTrigger } from '../../shared';
-import { EmitterEvent } from '../emitter';
-import { Condition } from '../condition';
-import { Actor } from '../../actor';
+import type { CombatState } from '../state/index.ts';
+import type { DamageElement, Status, EventTrigger } from '../../shared/types.ts';
+import type { EmitterEvent } from '../emitter/types.ts';
+import type { Condition } from '../condition/types.ts';
+import type { Actor } from '../../actor/types.ts';
 
 export interface Operation {
 	name: string;

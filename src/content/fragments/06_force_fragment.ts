@@ -1,6 +1,6 @@
 // src/content/fragments/06_force_fragment.ts
 
-import { FragmentDefinition } from './';
+import type { FragmentDefinition } from './index.ts';
 
 export const ForceFragment: FragmentDefinition = {
 	name: 'Force Fragment',

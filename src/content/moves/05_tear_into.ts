@@ -1,6 +1,6 @@
 // src/content/moves/05_tear_into.ts
 
-import { MoveDefinition } from './';
+import type { MoveDefinition } from './index.ts';
 
 export const TearInto: MoveDefinition = {
 	name: 'Tear Into',

@@ -1,13 +1,18 @@
 // src/combat/state/constructor.ts
 
-import { CombatState, CombatEntity, CombatBlessing, CombatMove } from './';
-import { createMoveListeners, MoveListenerGroups } from './actor/listener.ts';
-import { Operation, OperationMatrix } from '../operation';
-import { registerListeners } from '../listener';
-import { DamageElements, Statuses, DamageElement, Speed, MoveType } from '../../shared/index.ts';
-import { MoveDefinition, OperationDefinition, getMoveDefinition } from '../../content/moves/index.ts';
-import { FragmentDefinition, getFragmentDefinition } from '../../content/fragments/index.ts';
-import { Entity, Move } from '../../actor/index.ts';
+import type { CombatState, CombatEntity, CombatBlessing, CombatMove } from './index.ts';
+import { createMoveListeners } from './actor/listener.ts';
+import type { MoveListenerGroups } from './actor/listener.ts';
+import type { Operation, OperationMatrix } from '../operation/types.ts';
+import { registerListeners } from '../listener/constructor.ts';
+import { DamageElements, Statuses } from '../../shared/constants.ts';
+import type { DamageElement, Speed, MoveType } from '../../shared/types.ts';
+import type { MoveDefinition, OperationDefinition } from '../../content/moves/index.ts';
+import { getMoveDefinition } from '../../content/moves/index.ts';
+import type { FragmentDefinition } from '../../content/fragments/index.ts';
+import { getFragmentDefinition } from '../../content/fragments/index.ts';
+import type { Entity } from '../../actor/entity/types.ts';
+import type { Move } from '../../actor/move/types.ts';
 
 interface CombatMoves {
 	moves: Array<CombatMove>;
@@ -113,7 +118,7 @@ function createCombatMoves (
 			whileBanked: [],
 			whileOnCooldown: [],
 		};
-		for (const phase of OperationPhases) {
+		for (const phase of TriggeredOperationPhases) {
 			actors[phase] = registerListeners(
 				combatState,
 				created.listeners[phase],

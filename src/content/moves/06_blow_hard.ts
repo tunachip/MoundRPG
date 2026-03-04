@@ -1,6 +1,6 @@
 // src/content/moves/06_blow_hard.ts
 
-import { MoveDefinition } from './';
+import type { MoveDefinition } from './index.ts';
 
 export const BlowHard: MoveDefinition = {
 	name: 'Blow Hard',

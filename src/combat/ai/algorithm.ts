@@ -1,11 +1,11 @@
 // src/combat/ai/algorithm.ts
 
-import { Actor } from '../../actor/index.ts';
-import { Speed } from '../../shared/types.ts';
-import { Temperament } from '../../content/encounters/index.ts';
-import { CombatState } from '../state/index.ts';
-import { DeclaredAction } from '../turn/index.ts';
-import { CombatAiProfile } from './types.ts';
+import type { Actor } from '../../actor/types.ts';
+import type { Speed } from '../../shared/types.ts';
+import type { Temperament } from '../../content/encounters/types.ts';
+import type { CombatState } from '../state/index.ts';
+import type { DeclaredAction } from '../turn/index.ts';
+import type { CombatAiProfile } from './types.ts';
 
 export function createAiActions (
 	combat: CombatState,

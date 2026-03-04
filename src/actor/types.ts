@@ -1,6 +1,6 @@
 // src/actor/types.ts
 
-import { ActorType } from '../shared';
+import type { ActorType } from '../shared/types.ts';
 
 export interface Actor {
 	type: ActorType;

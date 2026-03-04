@@ -1,6 +1,6 @@
 // src/combat/operation/energy.ts
 
-import { OperationContext, OperationResult } from './';
+import type { OperationContext, OperationResult } from './types.ts';
 import { forEachTargetEntity, requireCtxAmount } from './helpers.ts';
 
 export function applyEnergy (

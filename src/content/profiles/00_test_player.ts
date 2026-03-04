@@ -1,6 +1,6 @@
 // src/content/profiles/00_test_player.ts
 
-import { Entity } from '../../actor/index.ts';
+import type { Entity } from '../../actor/entity/types.ts';
 
 export const TestPlayerProfile: Entity = {
 	name: 'Test Player',

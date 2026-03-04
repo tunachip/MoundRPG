@@ -1,16 +1,16 @@
 // src/combat/operation/damage.ts
 
 import {
-	OperationContext,
-	OperationResult,
-	DamageResult,
-	requireCtxCalculatedDamage,
-	heal,
-	negateAttunement,
-	forEachTargetEntity,
-} from './';
-import { CombatEntity } from '../state';
-import { DamageElement, getDamageRules } from '../../shared';
+	type OperationContext,
+	type OperationResult,
+	type DamageResult,
+} from './types.ts';
+import { requireCtxCalculatedDamage, forEachTargetEntity } from './helpers.ts';
+import { heal } from './health.ts';
+import { negateAttunement } from './attunement.ts';
+import type { CombatEntity } from '../state/index.ts';
+import { getDamageRules } from '../../shared/damageRules.ts';
+import type { DamageElement } from '../../shared/types.ts';
 
 export function calculateDamage (
 	baseDamage: number,

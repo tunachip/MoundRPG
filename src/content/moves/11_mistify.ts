@@ -1,6 +1,6 @@
 // src/content/moves/11_mistify.ts
 
-import { MoveDefinition } from './';
+import type { MoveDefinition } from './index.ts';
 
 export const Mistify: MoveDefinition = {
 	name: 'Mistify',

@@ -1,6 +1,6 @@
 // src/content/moves/07_general_strike.ts
 
-import { MoveDefinition } from './';
+import type { MoveDefinition } from './index.ts';
 
 export const GeneralStrike: MoveDefinition = {
 	name: 'General Strike',

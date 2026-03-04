@@ -1,8 +1,8 @@
 // src/combat/operation/attack.ts
 
-import { OperationContext, OperationResult, calculateDamage, resolveDamage } from './';
+import type { OperationContext, OperationResult } from './types.ts';
+import { calculateDamage, resolveDamage } from './damage.ts';
 import { forEachTargetEntity, requireCombatEntity, requireCtxBaseDamage, requireCtxElement } from './helpers.ts';
-import { DamageElement, getDamageRules } from '../../shared';
 
 export function attack (
 	ctx: OperationContext
@@ -24,4 +24,3 @@ export function attack (
 	});
 	return result;
 }
-

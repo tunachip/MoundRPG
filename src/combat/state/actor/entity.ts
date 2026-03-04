@@ -1,6 +1,6 @@
 // src/combat/state/types/entity.ts
 
-import { DamageElement, Status, EntityType } from '../../../shared/index.ts';
+import type { DamageElement, Status, EntityType } from '../../../shared/types.ts';
 
 export interface CombatEntity {
 	name: string;

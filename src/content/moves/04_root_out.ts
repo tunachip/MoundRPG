@@ -1,6 +1,6 @@
 // src/content/moves/04_root_out.ts
 
-import { MoveDefinition } from './';
+import type { MoveDefinition } from './index.ts';
 
 export const RootOut: MoveDefinition = {
 	name: 'Root Out',
@@ -38,4 +38,3 @@ export const RootOut: MoveDefinition = {
 		],
 	},
 }
-

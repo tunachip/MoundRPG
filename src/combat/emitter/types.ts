@@ -1,7 +1,7 @@
 // src/combat/emitter/types.ts
 
-import { Actor } from '../../actor';
-import { EventTrigger } from '../../shared';
+import type { Actor } from '../../actor/types.ts';
+import type { EventTrigger } from '../../shared/types.ts';
 
 
 export interface EmitterEvent {

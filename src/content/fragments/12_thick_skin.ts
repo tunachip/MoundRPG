@@ -1,6 +1,6 @@
 // src/content/fragments/12_thick_skin.ts
 
-import { FragmentDefinition } from './';
+import type { FragmentDefinition } from './index.ts';
 
 export const ThickSkin: FragmentDefinition = {
 	name: 'Thick Skin',

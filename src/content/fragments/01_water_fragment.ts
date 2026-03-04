@@ -1,6 +1,6 @@
 // src/content/fragments/01_water_fragment.ts
 
-import { FragmentDefinition } from './';
+import type { FragmentDefinition } from './index.ts';
 
 export const WaterFragment: FragmentDefinition = {
 	name: 'Water Fragment',

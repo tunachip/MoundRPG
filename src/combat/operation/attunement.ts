@@ -1,6 +1,6 @@
 // src/combat/operation/attunement.ts
 
-import { OperationContext, OperationResult } from './';
+import type { OperationContext, OperationResult } from './types.ts';
 import { forEachTargetEntity, requireCtxElement } from './helpers.ts';
 
 export function applyAttunement (

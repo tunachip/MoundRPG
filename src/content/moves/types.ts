@@ -1,7 +1,6 @@
 // src/content/moves/types.ts
 
-import { DamageElement, EventTrigger, ActorType, MoveType, Speed, Status, OpCode } from '../../shared';
-import { Condition } from '../../combat/condition';
+import type { DamageElement, EventTrigger, ActorType, MoveType, Speed, Status, OpCode } from '../../shared/types.ts';
 
 interface Range {
 	min: number;

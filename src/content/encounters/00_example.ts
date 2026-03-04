@@ -1,6 +1,6 @@
 // src/content/encounters/00_example.ts
 
-import { EncounterDefinition } from './';
+import type { EncounterDefinition } from './index.ts';
 
 export const ExampleEncounter: EncounterDefinition = {
 	definitionId: 0,

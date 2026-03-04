@@ -1,6 +1,6 @@
 // src/content/fragments/04_plant_fragment.ts
 
-import { FragmentDefinition } from './';
+import type { FragmentDefinition } from './index.ts';
 
 export const PlantFragment: FragmentDefinition = {
 	name: 'Plant Fragment',

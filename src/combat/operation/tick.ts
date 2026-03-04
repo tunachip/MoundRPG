@@ -1,8 +1,10 @@
 // src/combat/operation/tick.ts
 
-import { OperationContext, OperationResult, calculateDamage, resolveDamage, heal } from './';
+import type { OperationContext, OperationResult } from './types.ts';
+import { calculateDamage, resolveDamage } from './damage.ts';
+import { heal } from './health.ts';
 import { forEachTargetEntity, requireCtxStatus } from './helpers.ts';
-import { Status, DamageElement } from '../../shared';
+import type { Status, DamageElement } from '../../shared/types.ts';
 
 function resolveStatusElement (
 	status: Status

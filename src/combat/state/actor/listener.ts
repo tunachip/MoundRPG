@@ -1,14 +1,15 @@
 // src/combat/state/actor/listener.ts
 
-import { Listener, createListener } from '../../listener';
-import { Operation } from '../../operation';
-import { Condition } from '../../condition';
+import { createListener } from '../../listener/index.ts';
+import type { Listener } from '../../listener/index.ts';
+import type { Operation } from '../../operation/types.ts';
+import type { Condition } from '../../condition/types.ts';
 import {
-	ConditionDefinition,
-	OperationDefinition,
-	TriggeredOperationsDefinition,
-	MoveDefinition,
-} from '../../../content/moves';
+	type ConditionDefinition,
+	type OperationDefinition,
+	type TriggeredOperationsDefinition,
+	type MoveDefinition,
+} from '../../../content/moves/index.ts';
 
 export interface MoveListenerGroups {
 	whileActive: Array<Listener>;

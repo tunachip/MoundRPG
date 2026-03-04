@@ -1,9 +1,9 @@
 // src/combat/operation/helpers.ts
 
-import { CombatState, CombatEntity, CombatMove, CombatBlessing, Listener } from '../state';
-import { Actor } from '../../actor';
-import { DamageElement, Status } from '../../shared';
-import { OperationContext, DamageResult } from './types.ts';
+import type { CombatState, CombatEntity, CombatMove, CombatBlessing, Listener } from '../state/index.ts';
+import type { Actor } from '../../actor/types.ts';
+import type { DamageElement, Status } from '../../shared/types.ts';
+import type { OperationContext, DamageResult } from './types.ts';
 
 export function requireCombatEntity (
 	combat: CombatState,

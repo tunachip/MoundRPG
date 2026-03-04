@@ -1,9 +1,9 @@
 // src/actor/entity/types.ts
 
-import { Culture, EntityType } from '../../shared';
-import { Inventory } from '../item';
-import { Move } from '../move';
-import { Blessing } from '../blessing';
+import type { Culture, EntityType } from '../../shared/types.ts';
+import { Inventory } from '../item/index.ts';
+import { Move } from '../move/index.ts';
+import { Blessing } from '../blessing/index.ts';
 
 export interface Entity {
 	name:			 string;
@@ -19,4 +19,3 @@ export interface Entity {
 	inventory: Inventory;
 	definitionId?: number;
 }
-

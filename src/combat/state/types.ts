@@ -1,6 +1,6 @@
 // src/combat/state/types.ts
 
-import { CombatEntity, CombatMove, CombatBlessing, Listener } from './actor/index.ts';
+import type { CombatEntity, CombatMove, CombatBlessing, Listener } from './actor/index.ts';
 
 export interface CombatState {
 	turn: number;

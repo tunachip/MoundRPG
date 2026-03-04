@@ -1,6 +1,6 @@
 // src/content/moves/03_fire_away.ts
 
-import { MoveDefinition } from './';
+import type { MoveDefinition } from './index.ts';
 
 export const FireAway: MoveDefinition = {
 	name: 'Fire Away',

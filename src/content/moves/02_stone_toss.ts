@@ -1,6 +1,6 @@
 // src/content/moves/02_stone_toss.ts
 
-import { MoveDefinition } from './';
+import type { MoveDefinition } from './index.ts';
 
 export const StoneToss: MoveDefinition = {
 	name: 'Stone Toss',

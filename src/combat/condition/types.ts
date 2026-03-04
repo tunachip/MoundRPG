@@ -1,6 +1,6 @@
 // src/combat/condition/types.ts
 
-import { CombatState } from '../state';
+import type { CombatState } from '../state/types.ts';
 
 export interface Condition {
 	name: string;

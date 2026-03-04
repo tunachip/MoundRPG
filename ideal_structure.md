@@ -1,2 +1,0 @@
-* ideal_structure.md
-

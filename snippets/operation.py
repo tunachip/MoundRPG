@@ -4,19 +4,19 @@ import sys
 def main(name):
 	return f'''
 export function {name} (
-	ctx: OperationContext
+  ctx: OperationContext
 ): OperationResult {{
-    const result: OperationResult = {{ breaks: false }};
+  const result: OperationResult = {{ breaks: false }};
 
-    forEachTargetEntity(ctx, (target, targetActor) => {{
+  forEachTargetEntity(ctx, (target, targetActor) => {{
 
-        result.triggers ??= [];
-        result.triggers.push({{
-            trigger: '',
-            actors: [targretActor],
-        }});
+    result.triggers ??= [];
+    result.triggers.push({{
+      trigger: '',
+      actors: [targetActor],
     }});
-    return result;
+  }});
+  return result;
 }}'''
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@
 import { CombatState, CombatEntity, CombatMove, CombatBlessing, Listener } from '../state';
 import { Actor } from '../../actor';
 import { DamageElement, Status } from '../../shared';
-import { OperationContext } from './types.ts';
+import { OperationContext, DamageResult } from './types.ts';
 
 export function requireCombatEntity (
 	combat: CombatState,
@@ -104,7 +104,7 @@ export function requireCtxBaseDamage (
 export function requireCtxCalculatedDamage (
 	ctx: OperationContext,
 	operationName: string,
-): number {
+): DamageResult {
 	if (ctx.calculatedDamage === undefined) {
 		throw new Error(`${operationName} requires ctx.calculatedDamage.`);
 	}

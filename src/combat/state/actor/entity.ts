@@ -17,6 +17,7 @@ export interface CombatEntity {
 	maxStatusTurns: Record<Status, number>;
 	immuneToStatus: Record<Status, boolean>;
 	damageTaken: DamageHistory;
+	index: number;
 }
 
 interface DamageHistory {

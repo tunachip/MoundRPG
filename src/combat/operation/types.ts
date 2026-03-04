@@ -11,6 +11,12 @@ export interface Operation {
 	args: OperationContext;
 }
 
+export interface DamageResult {
+	damage: number;
+	absorb: number;
+	blockedBy: Array<DamageElement>;
+}
+
 export interface OperationContext {
 	combat: CombatState;
 	caster: Actor;
@@ -20,7 +26,7 @@ export interface OperationContext {
 	status?: Status;
 	amount?: number;
 	baseDamage?: number;
-	calculatedDamage?: number;
+	calculatedDamage?: DamageResult;
 }
 
 interface Change {

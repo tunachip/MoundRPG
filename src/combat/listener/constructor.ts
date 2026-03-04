@@ -4,7 +4,7 @@ import { Actor } from '../../actor';
 import { CombatState } from '../state';
 import { Listener, ListenerContext } from './types.ts';
 
-export function buildListener (
+export function createListener (
 	ctx: ListenerContext
 ): Listener {
 	return {

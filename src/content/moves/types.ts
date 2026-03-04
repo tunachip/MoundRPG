@@ -10,7 +10,8 @@ interface Range {
 
 type OperationDefinitionTarget = 'caster' | 'chosen' | 'random' | 'self';
 
-interface OperationDefintionArgs {
+export interface OperationDefinitionArgs {
+	[key: string]: unknown;
 	targetCountRange?: Range;
 	target?: OperationDefinitionTarget;
 	targetType: ActorType;
@@ -23,7 +24,7 @@ interface OperationDefintionArgs {
 
 export interface OperationDefinition {
 	operation: OpCode;
-	args: OperationDefintionArgs;
+	args: OperationDefinitionArgs;
 }
 
 interface ConditionDefinitionArgs {

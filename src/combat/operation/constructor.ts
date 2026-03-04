@@ -4,7 +4,7 @@ import { OperationContext } from './types.ts';
 import { CombatState } from '../state';
 import { DeclaredAction } from '../turn';
 
-export function buildOperationContext (
+export function createOperationContext (
 	combat: CombatState,
 	action: DeclaredAction,
 ): OperationContext {

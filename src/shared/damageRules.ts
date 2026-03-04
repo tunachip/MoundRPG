@@ -1,6 +1,6 @@
 // src/shared/damageRules.ts
 
-import { DamageElement } from './';
+import { DamageElement } from './types.ts';
 
 interface DamageRule {
 	weakTo: Array<DamageElement>;

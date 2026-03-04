@@ -1,6 +1,6 @@
 // src/actor/entity/types.ts
 
-import { Culture, EntityType } from '../../shared/types.ts';
+import { Culture, EntityType } from '../../shared';
 import { Inventory } from '../item';
 import { Move } from '../move';
 import { Blessing } from '../blessing';

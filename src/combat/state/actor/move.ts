@@ -1,7 +1,7 @@
 // src/combat/state/actor/move.ts
 
-import { DamageElement, MoveType, Speed } from '../../../shared';
-import { OperationMatrix } from '../../operation';
+import { DamageElement, MoveType, Speed } from '../../../shared/index.ts';
+import { OperationMatrix } from '../../operation/index.ts';
 
 export interface CombatMove {
 	name: string;

@@ -8,7 +8,7 @@ import { Actor } from '../../actor';
 
 export interface Operation {
 	name: string;
-	args: OperationContext;
+	args: Record<string, unknown>;
 }
 
 export interface DamageResult {
@@ -51,4 +51,3 @@ export interface ConditionalOperations {
 	conditions: Array<Condition>;
 	operations: Array<Operation>;
 }
-

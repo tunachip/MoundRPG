@@ -1,6 +1,6 @@
 // src/combat/state/types/entity.ts
 
-import { DamageElement, Status, EntityType } from '../../../shared';
+import { DamageElement, Status, EntityType } from '../../../shared/index.ts';
 
 export interface CombatEntity {
 	name: string;
@@ -18,6 +18,8 @@ export interface CombatEntity {
 	immuneToStatus: Record<Status, boolean>;
 	damageTaken: DamageHistory;
 	index: number;
+	moves: Array<number>;
+	blessings: Array<number>;
 }
 
 interface DamageHistory {

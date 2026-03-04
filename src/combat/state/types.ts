@@ -1,6 +1,6 @@
 // src/combat/state/types.ts
 
-import { CombatEntity, CombatMove, CombatBlessing, Listener } from './actor';
+import { CombatEntity, CombatMove, CombatBlessing, Listener } from './actor/index.ts';
 
 export interface CombatState {
 	turn: number;
@@ -9,4 +9,3 @@ export interface CombatState {
 	blessings: Array<CombatBlessing>;
 	listeners: Array<Listener>;
 }
-

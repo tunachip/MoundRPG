@@ -9,7 +9,6 @@ export function applyStatus (
 	const result: OperationResult = { breaks: false };
 	const status = requireCtxStatus(ctx, 'applyStatus');
 	const amount = requireCtxAmount(ctx, 'applyStatus');
-
 	forEachTargetEntity(ctx, (target, targetActor) => {
 		const current = target.statusTurns[status];
 		const max = target.maxStatusTurns[status];
@@ -17,7 +16,6 @@ export function applyStatus (
 			const after = Math.min(max, current + amount);
 			target.hasStatus[status] = true;
 			target.statusTurns[status] = after;
-
 			result.triggers ??= [];
 			result.triggers.push({
 				trigger: 'entity:status:gained',
@@ -34,7 +32,6 @@ export function reduceStatus (
 	const result: OperationResult = { breaks: false };
 	const status = requireCtxStatus(ctx, 'reduceStatus');
 	const amount = requireCtxAmount(ctx, 'reduceStatus');
-
 	forEachTargetEntity(ctx, (target, targetActor) => {
 		const current = target.statusTurns[status];
 		if (current > 0) {
@@ -43,7 +40,6 @@ export function reduceStatus (
 			if (after < 1) {
 				target.hasStatus[status] = false;
 			}
-
 			result.triggers ??= [];
 			result.triggers.push({
 				trigger: 'entity:status:lost',
@@ -59,12 +55,10 @@ export function negateStatus (
 ): OperationResult {
 	const result: OperationResult = { breaks: false };
 	const status = requireCtxStatus(ctx, 'negateStatus');
-
 	forEachTargetEntity(ctx, (target, targetActor) => {
 		if (target.hasStatus[status]) {
 			target.hasStatus[status] = false;
 			target.statusTurns[status] = 0;
-
 			result.triggers ??= [];
 			result.triggers.push({
 				trigger: 'entity:status:lost',
@@ -81,7 +75,6 @@ export function spendStatus (
 	const result: OperationResult = { breaks: false };
 	const status = requireCtxStatus(ctx, 'spendStatus');
 	const amount = requireCtxAmount(ctx, 'spendStatus');
-
 	forEachTargetEntity(ctx, (target, targetActor) => {
 		const current = target.statusTurns[status];
 		if (current > 0) {
@@ -90,7 +83,6 @@ export function spendStatus (
 			if (after < 1) {
 				target.hasStatus[status] = false;
 			}
-
 			result.changes ??= [];
 			result.changes.push({
 				field: 'entity.statusTurns',
@@ -113,10 +105,8 @@ export function raiseMaxStatusTurns (
 	const result: OperationResult = { breaks: false };
 	const status = requireCtxStatus(ctx, 'raiseMaxStatusTurns');
 	const amount = requireCtxAmount(ctx, 'raiseMaxStatusTurns');
-
 	forEachTargetEntity(ctx, (target, targetActor) => {
 		target.maxStatusTurns[status] += amount;
-		
 		result.triggers ??= [];
 		result.triggers.push({
 			trigger: 'entity:maxStatusTurns:raised',
@@ -132,12 +122,10 @@ export function lowerMaxStatusTurns (
 	const result: OperationResult = { breaks: false };
 	const status = requireCtxStatus(ctx, 'lowerMaxStatusTurns');
 	const amount = requireCtxAmount(ctx, 'lowerMaxStatusTurns');
-
-	forEachTargetEntity(ctx, (target) => {
+	forEachTargetEntity(ctx, (target, targetActor) => {
 		const current = target.maxStatusTurns[status];
 		const after = Math.max(0, current - amount)
 		target.maxStatusTurns[status] = after;
-
 		result.triggers ??= [];
 		result.triggers.push({
 			trigger: 'entity:maxStatusTurns:lowered',

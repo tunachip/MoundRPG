@@ -4,6 +4,16 @@ import { ActorType, EventTrigger } from '../../shared';
 import { OperationMatrix } from '../operation';
 import { Condition } from '../condition';
 
+export interface ListenerContext {
+	name: string;
+	source: ListenerSource;
+	owner: ListenerSource;
+	triggers: Array<EventTrigger>;
+	conditions: Array<Condition>;
+	operations: OperationMatrix;
+	isActive?: boolean;
+}
+
 export interface Listener {
 	name: string;
 	source: ListenerSource;
@@ -14,7 +24,7 @@ export interface Listener {
 	operations: OperationMatrix;
 }
 
-interface ListenerSource {
+export interface ListenerSource {
 	type: ActorType;
 	index: number;
 }

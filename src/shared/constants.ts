@@ -67,6 +67,7 @@ export const EventTriggers = [
 	'pre:entity:death',
 	'pre:entity:attunementBlock',
 	'pre:entity:fullHeal',
+	'pre:entity:attacked',
 	// side effects triggers
 	// format: 'actor:field:change'
 	'entity:hp:gained',
@@ -85,6 +86,8 @@ export const EventTriggers = [
 	'entity:maxStatusTurns:lowered',
 	'entity:curseRisk:gained',
 	'entity:curseRisk:lost',
+	'listener:activated',
+	'listener:deactivated',
 	// post-event triggers
 	// format: 'post:actor:event'
 	'post:entity:death',
@@ -96,4 +99,31 @@ export const ActionTypes = [
 	'activateMove',
 	'castMove',
 	'focus',
+] as const;
+
+export const OpCodes = [
+	'attack',
+	'applyAttunement',
+	'negateAttunement',
+	'spendAttunement',
+	'applyCurseRisk',
+	'reduceCurseRisk',
+	'negateCurseRisk',
+	'spendCurseRisk',
+	'applyEnergy',
+	'reduceEnergy',
+	'negateEnergy',
+	'spendEnergy',
+	'raiseMaxEnergy',
+	'lowerMaxEnergy',
+	'applyStatus',
+	'reduceStatus',
+	'negateStatus',
+	'spendStatus',
+	'applyCooldown',
+	'reduceCooldown',
+	'negateCooldown',
+	'spendCooldown',
+	'raiseMaxStatusTurns',
+	'lowerMaxStatusTurns',
 ] as const;

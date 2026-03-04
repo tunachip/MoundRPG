@@ -2,6 +2,7 @@
 
 import { CombatState } from '../state';
 import { DamageElement, Status, EventTrigger } from '../../shared';
+import { EmitterEvent } from '../emitter';
 import { Condition } from '../condition';
 import { Actor } from '../../actor';
 
@@ -26,11 +27,6 @@ interface Change {
 	field: string;
 	before: any;
 	after: any;
-}
-
-interface EmitterEvent {
-	trigger: EventTrigger;
-	actors?: Array<Actor>;
 }
 
 export interface OperationResult {

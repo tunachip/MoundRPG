@@ -6,8 +6,9 @@ def main(name):
 export function {name} (
 	args: OperationContext
 ): OperationResult {{
+    const result: OperationResult = {{ breaks: false }};
 
-	return {{ breaks: false }};
+    return result;
 }}'''
 
 if __name__ == "__main__":

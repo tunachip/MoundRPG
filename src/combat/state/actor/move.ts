@@ -1,6 +1,6 @@
 // src/combat/state/actor/move.ts
 
-import { DamageElement, MoveType } from '../../../shared';
+import { DamageElement, MoveType, Speed } from '../../../shared';
 import { OperationMatrix } from '../../operation';
 
 export interface CombatMove {
@@ -9,6 +9,7 @@ export interface CombatMove {
 	isActive: boolean;
 	type: MoveType;
 	element: DamageElement;
+	speed: Speed;
 	isBound: boolean;
 	canChain: boolean;
 	operations: OperationMatrix;

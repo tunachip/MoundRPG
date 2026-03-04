@@ -6,5 +6,6 @@ export interface Blessing extends Item {
 }
 
 export interface BlessingDefinition {
+	name: string;
 
 }

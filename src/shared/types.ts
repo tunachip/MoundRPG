@@ -11,3 +11,4 @@ export type MoveType			= typeof Constants.MoveTypes[number];
 export type ActorType			= typeof Constants.ActorTypes[number];
 export type EventTrigger  = typeof Constants.EventTriggers[number];
 export type ActionType		= typeof Constants.ActionTypes[number];
+export type OpCode				= typeof Constants.OpCodes[number];

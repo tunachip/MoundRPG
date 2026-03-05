@@ -4,6 +4,7 @@ import type { CombatEntity, CombatMove, CombatBlessing, Listener } from './actor
 
 export interface CombatState {
 	turn: number;
+	hasPriority: number;
 	entities: Array<CombatEntity>;
 	moves: Array<CombatMove>;
 	blessings: Array<CombatBlessing>;

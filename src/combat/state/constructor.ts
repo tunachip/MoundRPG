@@ -51,6 +51,7 @@ export function createCombatState (
 ): CombatState {
 	const combatState: CombatState = {
 		turn: 0,
+		hasPriority: 0,
 		entities: [],
 		moves: [],
 		blessings: [],
@@ -70,8 +71,20 @@ export function createCombatState (
 		);
 		combatState.entities.push(combatEntity);
 	}
+	applyStartingEnergyOffset(combatState);
 
 	return combatState;
+}
+
+function applyStartingEnergyOffset (
+	combat: CombatState,
+): void {
+	for (const entity of combat.entities) {
+		if (entity.index === combat.hasPriority) {
+			continue;
+		}
+		entity.energy = Math.min(entity.maxEnergy, entity.energy + 1);
+	}
 }
 
 function createCombatEntity (

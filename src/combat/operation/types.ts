@@ -1,13 +1,13 @@
 // src/combat/operation/types.ts
 
 import type { CombatState } from '../state/index.ts';
-import type { DamageElement, Status, EventTrigger } from '../../shared/types.ts';
+import type { DamageElement, Status, EventTrigger, OpCode } from '../../shared/types.ts';
 import type { EmitterEvent } from '../emitter/types.ts';
 import type { Condition } from '../condition/types.ts';
 import type { Actor } from '../../actor/types.ts';
 
 export interface Operation {
-	name: string;
+	name: OpCode;
 	args: Record<string, unknown>;
 }
 

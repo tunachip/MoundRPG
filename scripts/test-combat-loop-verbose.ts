@@ -23,12 +23,12 @@ async function main (): Promise<void> {
 	const combat = createCombatState(leftEntity, [rightEntity]);
 	const leftIndex = 0;
 	const rightIndex = 1;
-	const leftProfile = createAiProfile(leftDefinition.temper);
-	const rightProfile = createAiProfile(rightDefinition.temper);
+	const leftProfile = createAiProfile(leftDefinition.tempers);
+	const rightProfile = createAiProfile(rightDefinition.tempers);
 
 	printBanner('AI VS AI COMBAT TEST');
-	printLine(`Left:  ${leftLabel(combat.entities[leftIndex].name)} (${leftDefinition.temper})`);
-	printLine(`Right: ${rightLabel(combat.entities[rightIndex].name)} (${rightDefinition.temper})`);
+	printLine(`Left:  ${leftLabel(combat.entities[leftIndex].name)} (${leftDefinition.tempers.join(', ')})`);
+	printLine(`Right: ${rightLabel(combat.entities[rightIndex].name)} (${rightDefinition.tempers.join(', ')})`);
 	printLine(`Speed: turnDelay=${turnDelayMs}ms, phaseDelay=${phaseDelayMs}ms`);
 	printLine('');
 	await sleep(phaseDelayMs);
@@ -192,7 +192,7 @@ function parsePlaybackArgs (): PlaybackArgs {
 	const speedArg = process.argv[2];
 	const turnDelayArg = process.argv[3];
 	const phaseDelayArg = process.argv[4];
-	const speedMultiplier = toPositiveNumber(speedArg, 1);
+	const speedMultiplier = toPositiveNumber(speedArg, 1) ?? 1;
 	const explicitTurnDelay = toPositiveNumber(turnDelayArg);
 	const explicitPhaseDelay = toPositiveNumber(phaseDelayArg);
 
@@ -232,30 +232,12 @@ function formatEntityByIndex (
 	return name;
 }
 
-function leftLabel (text: string): string {
-	return yellow(text);
-}
-
-function rightLabel (text: string): string {
-	return cyan(text);
-}
-
-function yellow (text: string): string {
-	return color(text, 33);
-}
-
-function cyan (text: string): string {
-	return color(text, 36);
-}
-
-function green (text: string): string {
-	return color(text, 32);
-}
-
-function red (text: string): string {
-	return color(text, 31);
-}
-
+function leftLabel (text: string): string { return yellow(text); }
+function rightLabel (text: string): string { return cyan(text); }
+function yellow (text: string): string { return color(text, 33); }
+function cyan (text: string): string { return color(text, 36); }
+function green (text: string): string { return color(text, 32); }
+function red (text: string): string { return color(text, 31); }
 function color (
 	text: string,
 	code: number,

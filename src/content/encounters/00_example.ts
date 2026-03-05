@@ -7,7 +7,7 @@ export const ExampleEncounter: EncounterDefinition = {
 	name: 'Example',
 	level: 1,
 	culture: 'bastard',
-	temper: 'timid',
+	tempers: ['frugal', 'defensive', 'utilitarian'],
 	hp: 20,
 	maxHp: 20,
 	energy: 0,
@@ -31,8 +31,8 @@ export const ExampleEncounter: EncounterDefinition = {
 		{ name: 'Root Out',
 			definitionId: 4,
 			fragments: [
-				{ name: 'Water Fragment',
-					definitionId: 1,
+				{ name: 'Vital Fragment',
+					definitionId: 5,
 				}
 			],
 			maxFragments: 1,

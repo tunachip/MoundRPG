@@ -216,6 +216,7 @@ function executeEntityChoices (
 	const result: OperationResult = { breaks: false };
 	const entity = combat.entities[entityIndex];
 	let lastMoveElement: DamageElement | '' = '';
+	const chainMoveHistory: Array<number> = [];
 
 	for (let actionIndex = 0; actionIndex < actions.length; actionIndex += 1) {
 		if (entity.hp <= 0) {
@@ -249,6 +250,9 @@ function executeEntityChoices (
 		if (!move) {
 			continue;
 		}
+		if (!isLegalChainMove(move.index, chainMoveHistory)) {
+			continue;
+		}
 		if (moveDisqualified(entity, move)) {
 			continue;
 		}
@@ -276,12 +280,28 @@ function executeEntityChoices (
 		}
 		mergeOperationResult(result, actionResult);
 		lastMoveElement = move.element;
+		chainMoveHistory.push(move.index);
 		if (actionResult.breaks) {
 			break;
 		}
 	}
 
 	return result;
+}
+
+function isLegalChainMove (
+	moveIndex: number,
+	chainMoveHistory: Array<number>,
+): boolean {
+	const last = chainMoveHistory[chainMoveHistory.length - 1];
+	if (last !== undefined && moveIndex === last) {
+		return false;
+	}
+	const prior = chainMoveHistory[chainMoveHistory.length - 2];
+	if (prior !== undefined && moveIndex === prior) {
+		return false;
+	}
+	return true;
 }
 
 function executeOperationMatrix (

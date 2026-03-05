@@ -8,12 +8,12 @@ function main (): void {
 	const encounterEntity = createEncounterEntityFromDefinition(encounterDefinition);
 	const combat = createCombatState(TestPlayerProfile, [encounterEntity]);
 	const encounterIndex = 1;
-	const profile = createAiProfile(encounterDefinition.temper);
+	const profile = createAiProfile(encounterDefinition.tempers);
 	const actions = createAiActions(combat, encounterIndex, profile);
 
 	process.stdout.write(JSON.stringify({
 		encounter: encounterDefinition.name,
-		temper: encounterDefinition.temper,
+		tempers: encounterDefinition.tempers,
 		entityCount: combat.entities.length,
 		moveCount: combat.moves.length,
 		listenerCount: combat.listeners.length,

@@ -1,16 +1,21 @@
 // src/combat/ai/algorithm.ts
 
 import type { Actor } from '../../actor/types.ts';
-import type { Speed } from '../../shared/types.ts';
-import type { Temperament } from '../../content/encounters/types.ts';
-import type { CombatState } from '../state/index.ts';
+import type { TemperamentTag } from '../../content/encounters/types.ts';
+import type { CombatState, CombatEntity, CombatMove } from '../state/index.ts';
 import type { DeclaredAction } from '../turn/index.ts';
 import type { CombatAiProfile } from './types.ts';
+import {
+	expandDynamicPriorities,
+	priorityWeight,
+	scoreAttackPressure,
+	scoreByTemperament,
+} from './rules.ts';
 
 export function createAiActions (
 	combat: CombatState,
 	casterIndex: number,
-	profile: CombatAiProfile
+	profile: CombatAiProfile,
 ): Array<DeclaredAction> {
 	const caster = combat.entities[casterIndex];
 	if (!caster || caster.hp <= 0) {
@@ -32,23 +37,35 @@ export function createAiActions (
 		1,
 		Math.min(
 			maxActionsForEnergy(caster.energy),
-			resolveMaxChainActions(profile)
+			resolveMaxChainActions(profile, combat, caster),
 		),
 	);
 	const actions: Array<DeclaredAction> = [];
+	const chainMoveHistory: Array<number> = [];
 
 	for (let chainIndex = 0; chainIndex < maxActions; chainIndex += 1) {
+		const disallowed = disallowedChainMoves(chainMoveHistory);
 		const availableMoveIndexes = caster.moves
-			.filter((moveIndex) => combat.moves[moveIndex]?.cooldownTurns === 0);
+			.filter((moveIndex) => combat.moves[moveIndex]?.cooldownTurns === 0)
+			.filter((moveIndex) => !combat.moves[moveIndex]?.isBound)
+			.filter((moveIndex) => !disallowed.has(moveIndex));
 		const bankedMoveIndexes = availableMoveIndexes.filter(
-			(moveIndex) => !simulatedActiveMoves.has(moveIndex) && !combat.moves[moveIndex].isBound
+			(moveIndex) => !simulatedActiveMoves.has(moveIndex)
 		);
 		const activeMoveIndexes = availableMoveIndexes.filter(
 			(moveIndex) => simulatedActiveMoves.has(moveIndex)
 		);
 
 		if (activeMoveIndexes.length === 0 && bankedMoveIndexes.length > 0) {
-			const moveIndex = pickMoveIndexByTemperament(combat, bankedMoveIndexes, profile, 'activate');
+			const moveIndex = pickMoveIndexByTemperament(
+				combat,
+				caster,
+				enemyTargets,
+				bankedMoveIndexes,
+				profile,
+				'activate',
+				chainIndex,
+			);
 			simulatedActiveMoves.add(moveIndex);
 			actions.push({
 				type: 'activateMove',
@@ -57,18 +74,29 @@ export function createAiActions (
 				targets: [],
 				chainIndex,
 			});
+			chainMoveHistory.push(moveIndex);
 			continue;
 		}
 
 		if (activeMoveIndexes.length > 0) {
-			const moveIndex = pickMoveIndexByTemperament(combat, activeMoveIndexes, profile, 'cast');
+			const moveIndex = pickMoveIndexByTemperament(
+				combat,
+				caster,
+				enemyTargets,
+				activeMoveIndexes,
+				profile,
+				'cast',
+				chainIndex,
+			);
+			const targets = pickTargetsByTemperament(combat, caster, enemyTargets, combat.moves[moveIndex], profile);
 			actions.push({
 				type: 'castMove',
 				caster: { type: 'entity', index: casterIndex },
 				move: { type: 'move', index: moveIndex },
-				targets: [enemyTargets[0]],
+				targets,
 				chainIndex,
 			});
+			chainMoveHistory.push(moveIndex);
 			continue;
 		}
 
@@ -84,90 +112,144 @@ export function createAiActions (
 	return actions;
 }
 
+function disallowedChainMoves (
+	chainMoveHistory: Array<number>,
+): Set<number> {
+	const disallowed = new Set<number>();
+	const last = chainMoveHistory[chainMoveHistory.length - 1];
+	if (last !== undefined) {
+		disallowed.add(last);
+	}
+	const prior = chainMoveHistory[chainMoveHistory.length - 2];
+	if (prior !== undefined) {
+		disallowed.add(prior);
+	}
+	return disallowed;
+}
+
 export function createAiProfile (
-	temperament: Temperament,
+	priorities: Array<TemperamentTag>,
 ): CombatAiProfile {
 	return {
-		temperament,
+		priorities,
 		maxChainActions: resolveMaxChainActions({
-			temperament,
+			priorities,
 		}),
 	};
 }
 
 function resolveMaxChainActions (
 	profile: CombatAiProfile,
+	combat?: CombatState,
+	caster?: CombatEntity,
 ): number {
 	if (profile.maxChainActions !== undefined) {
 		return profile.maxChainActions;
 	}
 
-	switch (profile.temperament) {
-		case 'timid':
-			return 1;
-		case 'normal':
-			return 2;
-		case 'tactical':
-			return 3;
-		case 'aggressive':
-			return 4;
+	let chainCap = 2;
+	const priorities = profile.priorities;
+	if (priorities.includes('spendthrift')) {
+		chainCap += 2;
 	}
+	if (priorities.includes('multi-tasker')) {
+		chainCap = Math.max(chainCap, 3);
+	}
+	if (priorities.includes('frugal')) {
+		chainCap = Math.min(chainCap, 2);
+	}
+	if (priorities.includes('explosive') && caster && caster.energy >= 3) {
+		chainCap += 1;
+	}
+	if (priorities.includes('earlybird') && combat) {
+		chainCap += combat.turn < 3 ? 1 : -1;
+	}
+
+	return Math.max(1, Math.min(chainCap, 6));
 }
 
 function maxActionsForEnergy (
-	energy: number
+	energy: number,
 ): number {
 	return Math.floor((1 + Math.sqrt(1 + (8 * energy))) / 2);
 }
 
-function pickMoveByTemperament (
-	moves: Array<number>,
-	combat: CombatState,
-	profile: CombatAiProfile,
-	intent: 'activate' | 'cast'
-): number {
-	if (moves.length === 1) {
-		return moves[0];
-	}
-
-	if (intent === 'cast') {
-		if (profile.temperament === 'aggressive') {
-			return moves.find((moveIndex) => combat.moves[moveIndex].type === 'attack') ?? moves[0];
-		}
-		if (profile.temperament === 'timid') {
-			return moves.find((moveIndex) => combat.moves[moveIndex].type === 'utility') ?? moves[0];
-		}
-	}
-
-	if (profile.temperament === 'tactical') {
-		return [...moves].sort(
-			(left, right) => speedValue(combat.moves[right].speed) - speedValue(combat.moves[left].speed)
-		)[0];
-	}
-
-	return moves[0];
-}
-
-function speedValue (
-	speed: Speed
-): number {
-	switch (speed) {
-		case 'quick':
-			return 3;
-		case 'normal':
-			return 2;
-		case 'slow':
-			return 1;
-		default:
-			return 0;
-	}
-}
-
 function pickMoveIndexByTemperament (
 	combat: CombatState,
+	caster: CombatEntity,
+	enemyTargets: Array<Actor>,
 	moveIndexes: Array<number>,
 	profile: CombatAiProfile,
 	intent: 'activate' | 'cast',
+	chainIndex: number,
 ): number {
-	return pickMoveByTemperament(moveIndexes, combat, profile, intent);
+	let bestMoveIndex = moveIndexes[0];
+	let bestScore = Number.NEGATIVE_INFINITY;
+
+	for (const moveIndex of moveIndexes) {
+		const move = combat.moves[moveIndex];
+		const score = scoreMoveByPriorities(combat, caster, enemyTargets, move, profile, intent, chainIndex);
+		if (score > bestScore) {
+			bestScore = score;
+			bestMoveIndex = moveIndex;
+			continue;
+		}
+		if (score === bestScore && Math.random() < 0.5) {
+			bestMoveIndex = moveIndex;
+		}
+	}
+
+	return bestMoveIndex;
+}
+
+function scoreMoveByPriorities (
+	combat: CombatState,
+	caster: CombatEntity,
+	enemyTargets: Array<Actor>,
+	move: CombatMove,
+	profile: CombatAiProfile,
+	intent: 'activate' | 'cast',
+	chainIndex: number,
+): number {
+	let score = intent === 'cast' ? 0.2 : 0;
+	const priorities = expandDynamicPriorities(profile.priorities, combat, caster);
+
+	for (let index = 0; index < priorities.length; index += 1) {
+		const temperament = priorities[index];
+		const weight = priorityWeight(index);
+		score += weight * scoreByTemperament(temperament, {
+			combat,
+			caster,
+			enemyTargets,
+			move,
+			intent,
+			chainIndex,
+		});
+	}
+
+	return score;
+}
+
+function pickTargetsByTemperament (
+	combat: CombatState,
+	caster: CombatEntity,
+	enemyTargets: Array<Actor>,
+	move: CombatMove,
+	profile: CombatAiProfile,
+): Array<Actor> {
+	if (enemyTargets.length <= 1) {
+		return enemyTargets;
+	}
+	const priorities = expandDynamicPriorities(profile.priorities, combat, caster);
+	if (priorities.includes('aggressive') || priorities.includes('offensive')) {
+		return [...enemyTargets].sort(
+			(left, right) => combat.entities[left.index].hp - combat.entities[right.index].hp
+		).slice(0, 1);
+	}
+	if (priorities.includes('tactical')) {
+		return [...enemyTargets].sort((left, right) =>
+			scoreAttackPressure(combat, [right], move.element) - scoreAttackPressure(combat, [left], move.element)
+		).slice(0, 1);
+	}
+	return [enemyTargets[0]];
 }

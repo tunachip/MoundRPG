@@ -11,7 +11,7 @@ function main (): void {
 
 	const playerIndex = 0;
 	const encounterIndex = 1;
-	const aiProfile = createAiProfile(encounterDefinition.temper);
+	const aiProfile = createAiProfile(encounterDefinition.tempers);
 	const aiActions = createAiActions(combat, encounterIndex, aiProfile);
 	const playerActions: Array<DeclaredAction> = [
 		{

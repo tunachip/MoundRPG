@@ -3,10 +3,10 @@
 import type { DamageElement } from './types.ts';
 
 interface DamageRule {
-	weakTo: Array<DamageElement>;
-	resists: Array<DamageElement>;
-	blocks: Array<DamageElement>;
-	absorbs: Array<DamageElement>;
+	weakTo:		Array<DamageElement>;
+	resists:	Array<DamageElement>;
+	blocks:		Array<DamageElement>;
+	absorbs:	Array<DamageElement>;
 }
 
 export function getDamageRules (

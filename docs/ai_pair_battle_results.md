@@ -7,6 +7,7 @@ Total Pairings: 135
 
 ## Scoreboard
 
+
 | Encounter | Wins | Losses | Draws | Battles | Win Rate | Avg Turns | HP Diff |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Early Sentinel [5] | 18 | 9 | 0 | 27 | 66.7% | 7.67 | 174 |
@@ -20,7 +21,9 @@ Total Pairings: 135
 | Stately Vicar [7] | 9 | 18 | 0 | 27 | 33.3% | 7.67 | -65 |
 | Utility Mystic [3] | 3 | 24 | 0 | 27 | 11.1% | 7.00 | -275 |
 
+
 ## Summary
+
 
 | Loop | Left | Right | Winner | Turns | Final HP (L-R) |
 |---:|---|---|---|---:|---:|
@@ -160,18 +163,67 @@ Total Pairings: 135
 | 3 | Stately Vicar [7] | Chaos Savant [9] | Stately Vicar [7] | 8 | 22-0 |
 | 3 | Opportunist [8] | Chaos Savant [9] | Opportunist [8] | 7 | 18-0 |
 
+
 ## Battle Histories
+
 
 ### Loop 1: Example [0] vs Aggro Raider [1]
 
 Winner: Aggro Raider [1]
 
-- T1 | Order: Example [0] -> Aggro Raider [1] | Example [0]: [0] activateMove Root Out (HP 20 -> 20) | Aggro Raider [1]: [0] activateMove Blow Hard ; [1] activateMove General Strike (HP 22 -> 22)
-- T2 | Order: Aggro Raider [1] -> Example [0] | Example [0]: [0] castMove Root Out -> Aggro Raider [1] ; [1] activateMove Stone Toss (HP 20 -> 15) | Aggro Raider [1]: [0] castMove Blow Hard -> Example [0] ; [1] castMove General Strike -> Example [0] (HP 22 -> 20)
-- T3 | Order: Example [0] -> Aggro Raider [1] | Example [0]: [0] castMove Stone Toss -> Aggro Raider [1] ; [1] castMove Root Out -> Aggro Raider [1] (HP 15 -> 11) | Aggro Raider [1]: [0] castMove Blow Hard -> Example [0] ; [1] castMove General Strike -> Example [0] (HP 20 -> 18)
-- T4 | Order: Aggro Raider [1] -> Example [0] | Example [0]: [0] castMove Stone Toss -> Aggro Raider [1] ; [1] castMove Root Out -> Aggro Raider [1] (HP 11 -> 6) | Aggro Raider [1]: [0] castMove Blow Hard -> Example [0] ; [1] castMove General Strike -> Example [0] (HP 18 -> 16)
-- T5 | Order: Example [0] -> Aggro Raider [1] | Example [0]: [0] castMove Stone Toss -> Aggro Raider [1] ; [1] castMove Root Out -> Aggro Raider [1] (HP 6 -> 2) | Aggro Raider [1]: [0] castMove Blow Hard -> Example [0] ; [1] castMove General Strike -> Example [0] (HP 16 -> 11)
-- T6 | Order: Aggro Raider [1] -> Example [0] | Example [0]: [0] castMove Stone Toss -> Aggro Raider [1] ; [1] castMove Root Out -> Aggro Raider [1] (HP 2 -> 0) | Aggro Raider [1]: [0] castMove Blow Hard -> Example [0] ; [1] castMove General Strike -> Example [0] (HP 11 -> 11)
+- T1 | Order: Example [0] -> Aggro Raider [1]
+  Example [0]:
+    [0] activateMove Root Out
+    (HP 20 -> 20) 
+  Aggro Raider [1]:
+    [0] activateMove Blow Hard
+    [1] activateMove General Strike
+    (HP 22 -> 22)
+- T2 | Order: Aggro Raider [1] -> Example [0]
+  Example [0]:
+    [0] castMove Root Out -> Aggro Raider [1]
+    [1] activateMove Stone Toss
+    (HP 20 -> 15)
+  Aggro Raider [1]:
+    [0] castMove Blow Hard -> Example [0]
+    [1] castMove General Strike -> Example [0]
+    (HP 22 -> 20)
+- T3 | Order: Example [0] -> Aggro Raider [1]
+  Example [0]:
+    [0] castMove Stone Toss -> Aggro Raider [1]
+    [1] castMove Root Out -> Aggro Raider [1]
+    (HP 15 -> 11)
+  Aggro Raider [1]:
+    [0] castMove Blow Hard -> Example [0]
+    [1] castMove General Strike -> Example [0]
+    (HP 20 -> 18)
+- T4 | Order: Aggro Raider [1] -> Example [0]
+  Example [0]:
+    [0] castMove Stone Toss -> Aggro Raider [1]
+    [1] castMove Root Out -> Aggro Raider [1]
+    (HP 11 -> 6)
+  Aggro Raider [1]:
+    [0] castMove Blow Hard -> Example [0]
+    [1] castMove General Strike -> Example [0]
+    (HP 18 -> 16)
+- T5 | Order: Example [0] -> Aggro Raider [1]
+  Example [0]:
+    [0] castMove Stone Toss -> Aggro Raider [1]
+    [1] castMove Root Out -> Aggro Raider [1]
+    (HP 6 -> 2)
+  Aggro Raider [1]:
+    [0] castMove Blow Hard -> Example [0]
+    [1] castMove General Strike -> Example [0]
+    (HP 16 -> 11)
+- T6 | Order: Aggro Raider [1] -> Example [0]
+  Example [0]:
+    [0] castMove Stone Toss -> Aggro Raider [1]
+    [1] castMove Root Out -> Aggro Raider [1]
+    (HP 2 -> 0)
+  Aggro Raider [1]:
+    [0] castMove Blow Hard -> Example [0]
+    [1] castMove General Strike -> Example [0]
+    (HP 11 -> 11)
 
 ### Loop 1: Example [0] vs Tactical Guard [2]
 

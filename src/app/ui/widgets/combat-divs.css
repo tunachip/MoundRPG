@@ -1,0 +1,104 @@
+* {
+	box-sizing: border-box;
+}
+
+.combat-ui {
+	position: relative;
+	display: grid;
+	padding: 10px;
+	gap: 25px;
+	grid-template-rows: minmax(0, 2fr) minmax(0, 4fr) minmax(0, 2fr) minmax(0, 2fr);
+}
+
+.combat-history-drawer {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	bottom: 10px;
+	overflow: hidden;
+	width: 0;
+	opacity: 0;
+	pointer-events: none;
+	transition: width 150ms ease, opacity 150ms ease;
+	z-index: 20;
+}
+
+.combat-history-drawer.is-open {
+	width: 340px;
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.combat-history-drawer.is-closed {
+	width: 0;
+	opacity: 0;
+}
+
+.combat-canvas {
+	position: relative;
+	background-color: #000000ff;
+	padding: 5px;
+	border: 2px solid white;
+	border-radius: 5px;
+}
+
+.combat-encounter-zone {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
+	max-width: 800px;
+	max-height: 200px;
+}
+
+.combat-player-zone {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
+	max-width: 800px;
+	max-height: 200px;
+}
+
+.combat-extra-zone {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: minmax(0, 5fr) minmax(0, 5fr);
+}
+
+.combat-entity-stats {
+}
+
+.combat-move-stats {
+}
+
+.combat-blessing-stats {
+}
+
+.combat-command-zone {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
+}
+
+.combat-command-prompt {
+}
+
+.combat-command-select {
+}
+
+.combat-history-tab {
+	position: absolute;
+	top: 50%;
+	right: -1px;
+	transform: translate(100%, -50%);
+	background-color: #d7dce4;
+	color: #111;
+	border: 2px solid #d7dce4;
+	border-left: 0;
+	border-radius: 0 6px 6px 0;
+	font-family: monospace;
+	padding: 8px 6px;
+	writing-mode: vertical-rl;
+	text-orientation: mixed;
+	letter-spacing: 1px;
+	cursor: pointer;
+}

@@ -1,6 +1,6 @@
 // src/combat/condition/types.ts
 
-import type { CombatState } from '../state/types.ts';
+import type { CombatStateManager } from '../state/types.ts';
 
 export interface Condition {
 	name: string;
@@ -9,5 +9,5 @@ export interface Condition {
 }
 
 interface ConditionContext {
-	combat: CombatState;
+	combat: CombatStateManager;
 }

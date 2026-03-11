@@ -1,6 +1,6 @@
 // src/combat/operation/types.ts
 
-import type { CombatState } from '../state/index.ts';
+import type { CombatStateManager } from '../state/index.ts';
 import type { DamageElement, Status, EventTrigger, OpCode } from '../../shared/types.ts';
 import type { EmitterEvent } from '../emitter/types.ts';
 import type { Condition } from '../condition/types.ts';
@@ -18,7 +18,7 @@ export interface DamageResult {
 }
 
 export interface OperationContext {
-	combat: CombatState;
+	combat: CombatStateManager;
 	caster: Actor;
 	targets: Array<Actor>;
 	trigger?: EventTrigger;

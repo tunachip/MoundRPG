@@ -3,7 +3,7 @@
 import type { Actor } from '../../actor/types.ts';
 import { DamageElements, Statuses } from '../../shared/constants.ts';
 import type { DamageElement, Status } from '../../shared/types.ts';
-import type { CombatState, CombatEntity, CombatMove } from '../state/index.ts';
+import type { CombatStateManager, CombatEntity, CombatMove } from '../state/index.ts';
 import type { DeclaredAction } from './types.ts';
 import type { Operation, OperationContext, OperationResult } from '../operation/types.ts';
 import { createOperationContext } from '../operation/constructor.ts';
@@ -20,12 +20,16 @@ export interface TurnExecutionResult {
 }
 
 export function executeCombatTurn (
-	combat: CombatState,
+	combat: CombatStateManager,
 	declaredActionsByEntity: Record<number, Array<DeclaredAction>>,
 	priorityEntityIndex?: number,
 ): TurnExecutionResult {
 	const activePriority = priorityEntityIndex ?? combat.hasPriority;
-	const order = calculateTurnOrder(combat, declaredActionsByEntity, activePriority);
+	const order = calculateTurnOrder(
+		combat,
+		declaredActionsByEntity,
+		activePriority
+	);
 
 	for (const entityIndex of order) {
 		const entity = combat.entities[entityIndex];
@@ -45,7 +49,7 @@ export function executeCombatTurn (
 }
 
 export function calculateTurnOrder (
-	combat: CombatState,
+	combat: CombatStateManager,
 	declaredActionsByEntity: Record<number, Array<DeclaredAction>>,
 	priorityEntityIndex?: number,
 ): Array<number> {
@@ -70,7 +74,7 @@ export function calculateTurnOrder (
 }
 
 function calculateEntityTurnSpeed (
-	combat: CombatState,
+	combat: CombatStateManager,
 	entity: CombatEntity,
 	actions: Array<DeclaredAction>,
 	priorityEntityIndex?: number,
@@ -100,7 +104,7 @@ function calculateEntityTurnSpeed (
 }
 
 function executeEntityTurn (
-	combat: CombatState,
+	combat: CombatStateManager,
 	entityIndex: number,
 	actions: Array<DeclaredAction>,
 ): OperationResult {
@@ -134,7 +138,11 @@ function executeEntityTurn (
 		}
 	}
 
-	const choicesResult = executeEntityChoices(combat, entityIndex, actions);
+	const choicesResult = executeEntityChoices(
+		combat,
+		entityIndex,
+		actions
+	);
 	mergeOperationResult(turnResult, choicesResult);
 	if (entity.hp <= 0 || choicesResult.breaks) {
 		return turnResult;
@@ -157,7 +165,7 @@ interface EntityCounters {
 }
 
 function auditCounters (
-	combat: CombatState,
+	combat: CombatStateManager,
 	entity: CombatEntity,
 ): EntityCounters {
 	const attunements = DamageElements.filter((element) => entity.attunedTo[element]);
@@ -174,7 +182,7 @@ function auditCounters (
 }
 
 function resolveCounters (
-	combat: CombatState,
+	combat: CombatStateManager,
 	entityIndex: number,
 	counters: EntityCounters,
 ): void {
@@ -209,7 +217,7 @@ function resolveCounters (
 }
 
 function executeEntityChoices (
-	combat: CombatState,
+	combat: CombatStateManager,
 	entityIndex: number,
 	actions: Array<DeclaredAction>,
 ): OperationResult {
@@ -250,14 +258,17 @@ function executeEntityChoices (
 		if (!move) {
 			continue;
 		}
-		if (!isLegalChainMove(move.index, chainMoveHistory)) {
+		if (!isLegalChainMove(action.move.index, chainMoveHistory)) {
 			continue;
 		}
 		if (moveDisqualified(entity, move)) {
 			continue;
 		}
-
-		const energyCost = applyElementTax(lastMoveElement, move.element, action.chainIndex);
+		const energyCost = applyElementTax(
+			lastMoveElement,
+			move.element,
+			action.chainIndex
+		);
 		if (entity.energy < energyCost) {
 			continue;
 		}
@@ -271,16 +282,28 @@ function executeEntityChoices (
 
 		let actionResult: OperationResult = { breaks: false };
 		if (move.cooldownTurns > 0) {
-			actionResult = executeOperationMatrix(combat, action, move.operations.fromOnCooldown);
+			actionResult = executeOperationMatrix(
+			  combat,
+			  action,
+			  move.operations.fromOnCooldown
+			);
 		} else if (action.type === 'activateMove') {
 			move.isActive = true;
-			actionResult = executeOperationMatrix(combat, action, move.operations.fromBanked);
+			actionResult = executeOperationMatrix(
+			  combat,
+			  action,
+			  move.operations.fromBanked
+			);
 		} else if (action.type === 'castMove') {
-			actionResult = executeOperationMatrix(combat, action, move.operations.fromActive);
+			actionResult = executeOperationMatrix(
+				combat,
+				action,
+				move.operations.fromActive
+			);
 		}
 		mergeOperationResult(result, actionResult);
 		lastMoveElement = move.element;
-		chainMoveHistory.push(move.index);
+		chainMoveHistory.push(action.move.index);
 		if (actionResult.breaks) {
 			break;
 		}
@@ -305,7 +328,7 @@ function isLegalChainMove (
 }
 
 function executeOperationMatrix (
-	combat: CombatState,
+	combat: CombatStateManager,
 	action: DeclaredAction,
 	operations: Array<Operation>,
 ): OperationResult {
@@ -323,7 +346,7 @@ function executeOperationMatrix (
 }
 
 function createExecutionContext (
-	combat: CombatState,
+	combat: CombatStateManager,
 	action: DeclaredAction,
 	operation: Operation,
 ): OperationContext {
@@ -380,9 +403,11 @@ function moveDisqualified (
 			return true;
 		case entity.hasStatus.sleep:
 			return true;
-		case move.type === 'attack' && entity.hasStatus.stun:
+		case move.type === 'attack'
+			&& entity.hasStatus.stun:
 			return true;
-		case move.type === 'utility' && entity.hasStatus.anger:
+		case move.type === 'utility'
+			&& entity.hasStatus.anger:
 			return true;
 		default:
 			return false;
@@ -415,18 +440,12 @@ function elementIndex (
 	element: Exclude<DamageElement, 'vital'>,
 ): number {
 	switch (element) {
-		case 'water':
-			return 0;
-		case 'stone':
-			return 1;
-		case 'fire':
-			return 2;
-		case 'plant':
-			return 3;
-		case 'force':
-			return 4;
-		case 'thunder':
-			return 5;
+		case 'water':		return 0;
+		case 'stone':		return 1;
+		case 'fire':		return 2;
+		case 'plant':		return 3;
+		case 'force':   return 4;
+		case 'thunder': return 5;
 	}
 }
 
@@ -453,7 +472,9 @@ function asTargetRange (
 		return undefined;
 	}
 	const range = value as { min?: unknown; max?: unknown };
-	if (typeof range.min !== 'number' || typeof range.max !== 'number') {
+	if (typeof range.min !== 'number'
+		|| typeof range.max !== 'number'
+	) {
 		return undefined;
 	}
 	return { min: range.min, max: range.max };
@@ -466,11 +487,13 @@ function mergeOperationResult (
 	if (incoming.breaks) {
 		target.breaks = true;
 	}
-	if (incoming.triggers && incoming.triggers.length > 0) {
+	if (incoming.triggers
+		&& incoming.triggers.length > 0) {
 		target.triggers ??= [];
 		target.triggers.push(...incoming.triggers);
 	}
-	if (incoming.changes && incoming.changes.length > 0) {
+	if (incoming.changes
+		&& incoming.changes.length > 0) {
 		target.changes ??= [];
 		target.changes.push(...incoming.changes);
 	}
@@ -479,7 +502,7 @@ function mergeOperationResult (
 const DamageTickStatuses: Array<Status> = ['burn', 'decay', 'wound'];
 
 function findNextLivingEntityIndex (
-	combat: CombatState,
+	combat: CombatStateManager,
 	currentIndex: number,
 ): number {
 	const total = combat.entities.length;

@@ -2,7 +2,7 @@
 
 import type { CombatEntity, CombatMove, CombatBlessing, Listener } from './actor/index.ts';
 
-export interface CombatState {
+export interface CombatStateManager {
 	turn: number;
 	hasPriority: number;
 	entities: Array<CombatEntity>;

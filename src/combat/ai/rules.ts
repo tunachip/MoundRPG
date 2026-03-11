@@ -4,11 +4,11 @@ import type { Actor } from '../../actor/types.ts';
 import type { TemperamentTag } from '../../content/encounters/types.ts';
 import { getDamageRules } from '../../shared/damageRules.ts';
 import type { DamageElement } from '../../shared/types.ts';
-import type { CombatState, CombatEntity, CombatMove } from '../state/index.ts';
+import type { CombatStateManager, CombatEntity, CombatMove } from '../state/index.ts';
 import type { Operation } from '../operation/types.ts';
 
 export interface AiRuleContext {
-	combat: CombatState;
+	combat: CombatStateManager;
 	caster: CombatEntity;
 	enemyTargets: Array<Actor>;
 	move: CombatMove;
@@ -98,7 +98,7 @@ export function scoreByTemperament (
 }
 
 export function scoreAttackPressure (
-	combat: CombatState,
+	combat: CombatStateManager,
 	enemyTargets: Array<Actor>,
 	element: DamageElement,
 ): number {
@@ -127,7 +127,7 @@ export function scoreAttackPressure (
 
 export function expandDynamicPriorities (
 	priorities: Array<TemperamentTag>,
-	combat: CombatState,
+	combat: CombatStateManager,
 	caster: CombatEntity,
 ): Array<TemperamentTag> {
 	const expanded = [...priorities];
@@ -152,7 +152,7 @@ export function priorityWeight (
 }
 
 function scoreDefensePressure (
-	combat: CombatState,
+	combat: CombatStateManager,
 	caster: CombatEntity,
 	element: DamageElement,
 ): number {
@@ -175,7 +175,7 @@ function scoreDefensePressure (
 }
 
 function findEnemyActiveAttackElements (
-	combat: CombatState,
+	combat: CombatStateManager,
 	casterIndex: number,
 ): Array<DamageElement> {
 	const elements: Array<DamageElement> = [];

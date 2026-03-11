@@ -1,0 +1,8 @@
+# Ignore dotfiles
+.*
+!.gitignore
+
+# Ignore dependencies
+node_modules/
+bower_components/
+jspm_packages/

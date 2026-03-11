@@ -1,11 +1,11 @@
 // src/combat/operation/constructor.ts
 
 import type { OperationContext } from './types.ts';
-import type { CombatState } from '../state/index.ts';
+import type { CombatStateManager } from '../state/index.ts';
 import type { DeclaredAction } from '../turn/index.ts';
 
 export function createOperationContext (
-	combat: CombatState,
+	combat: CombatStateManager,
 	action: DeclaredAction,
 ): OperationContext {
 	const element =

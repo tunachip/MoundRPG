@@ -1,0 +1,32 @@
+.combat-history {
+	height: 100%;
+	min-height: 0;
+	display: grid;
+	grid-template-rows: auto minmax(0, 1fr);
+	background-color: black;
+	border: 2px solid white;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+.combat-history-title {
+	margin: 0 0 8px 0;
+	font-family: monospace;
+	color: cyan;
+	font-size: 16px;
+}
+
+.combat-history-list {
+	display: flex;
+	flex-direction: column-reverse;
+	gap: 6px;
+	overflow-y: auto;
+	min-height: 0;
+}
+
+.combat-history-entry {
+	margin: 0;
+	font-family: monospace;
+	color: white;
+	white-space: pre-wrap;
+}

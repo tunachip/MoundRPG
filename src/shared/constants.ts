@@ -84,6 +84,8 @@ export const EventTriggers = [
 	'entity:attunement:lost',
 	'entity:status:gained',
 	'entity:status:lost',
+	'entity:ignoresStatus:gained',
+	'entity:ignoresStatus:lost',
 	'entity:maxStatusTurns:raised',
 	'entity:maxStatusTurns:lowered',
 	'entity:curseRisk:gained',
@@ -132,10 +134,45 @@ export const OpCodes = [
 	'reduceStatus',
 	'negateStatus',
 	'spendStatus',
+	'applyIgnoresStatus',
+	'negateIgnoresStatus',
 	'applyCooldown',
 	'reduceCooldown',
 	'negateCooldown',
 	'spendCooldown',
 	'raiseMaxStatusTurns',
 	'lowerMaxStatusTurns',
+] as const;
+
+export const AppStates = [
+	'boot',
+	'main_menu',
+	'character_select',
+	'pre_combat',
+	'combat',
+	'upgrade',
+	'game_over_memento',
+	'game_over_stats',
+	'run_end',
+] as const;
+
+export const CombatStates = [
+	'declare_actions',
+	'resolve_turn_order',
+	'execute_turns',
+	'await_player_reaction',
+	'update_end_of_turn',
+	'check_combat_end',
+] as const;
+
+export const AppEvents = [
+	'NEW_GAME',
+	'BUILD_CONFIRMED',
+	'ENCOUNTER_READY',
+	'START_COMBAT',
+	'COMBAT_WON',
+	'COMBAT_LOST',
+	'UPGRADE_DONE',
+	'MEMENTO_CHOSEN',
+	'RETURN_TO_MENU',
 ] as const;

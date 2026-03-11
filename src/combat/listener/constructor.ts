@@ -1,7 +1,7 @@
 // src/combat/listener/constructor.ts
 
 import type { Actor } from '../../actor/types.ts';
-import type { CombatState } from '../state/index.ts';
+import type { CombatStateManager } from '../state/index.ts';
 import type { Listener, ListenerContext } from './types.ts';
 
 export function createListener (
@@ -19,7 +19,7 @@ export function createListener (
 }
 
 export function registerListeners (
-	combat: CombatState,
+	combat: CombatStateManager,
 	listeners: Array<Listener>
 ): Array<Actor> {
 	const listenerActors: Array<Actor> = [];

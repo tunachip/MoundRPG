@@ -12,3 +12,6 @@ export type ActorType			= typeof Constants.ActorTypes[number];
 export type EventTrigger  = typeof Constants.EventTriggers[number];
 export type ActionType		= typeof Constants.ActionTypes[number];
 export type OpCode				= typeof Constants.OpCodes[number];
+export type AppState			= typeof Constants.AppStates[number];
+export type CombatState		= typeof Constants.CombatStates[number];
+export type AppEvent			= typeof Constants.AppEvents[number];

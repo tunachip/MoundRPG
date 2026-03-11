@@ -1,6 +1,6 @@
 // src/combat/state/constructor.ts
 
-import type { CombatState, CombatEntity, CombatBlessing, CombatMove } from './index.ts';
+import type { CombatStateManager, CombatEntity, CombatBlessing, CombatMove } from './index.ts';
 import { createMoveListeners } from './actor/listener.ts';
 import type { MoveListenerGroups } from './actor/listener.ts';
 import type { Operation, OperationMatrix } from '../operation/types.ts';
@@ -48,8 +48,8 @@ const TriggeredOperationPhases = [
 export function createCombatState (
 	player: Entity,
 	encounters: Array<Entity>,
-): CombatState {
-	const combatState: CombatState = {
+): CombatStateManager {
+	const combatState: CombatStateManager = {
 		turn: 0,
 		hasPriority: 0,
 		entities: [],
@@ -77,7 +77,7 @@ export function createCombatState (
 }
 
 function applyStartingEnergyOffset (
-	combat: CombatState,
+	combat: CombatStateManager,
 ): void {
 	for (const entity of combat.entities) {
 		if (entity.index === combat.hasPriority) {
@@ -115,7 +115,7 @@ function createCombatEntity (
 }
 
 function createCombatMoves (
-	combatState: CombatState,
+	combatState: CombatStateManager,
 	entity: Entity,
 	entityIndex: number,
 ): CombatMoves {
@@ -151,7 +151,7 @@ function createCombatMoves (
 }
 
 function createCombatBlessings (
-	combatState: CombatState,
+	combatState: CombatStateManager,
 	entity: Entity,
 	entityIndex: number,
 ): CombatBlessings {

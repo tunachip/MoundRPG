@@ -16,6 +16,7 @@ export interface CombatEntity {
 	statusTurns: Record<Status, number>;
 	maxStatusTurns: Record<Status, number>;
 	immuneToStatus: Record<Status, boolean>;
+	ignoresStatus: Record<Status, boolean>;
 	damageTaken: DamageHistory;
 	index: number;
 	moves: Array<number>;

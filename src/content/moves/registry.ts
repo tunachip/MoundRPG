@@ -8,6 +8,7 @@ import { TearInto } from './05_tear_into.ts';
 import { BlowHard } from './06_blow_hard.ts';
 import { GeneralStrike } from './07_general_strike.ts';
 import { Mistify } from './11_mistify.ts';
+import { BloodShot } from './15_blood_shot.ts';
 import type { MoveDefinition } from './types.ts';
 
 export const MoveDefinitionsById: Record<number, MoveDefinition> = {
@@ -19,6 +20,7 @@ export const MoveDefinitionsById: Record<number, MoveDefinition> = {
 	6: BlowHard,
 	7: GeneralStrike,
 	11: Mistify,
+	15: BloodShot,
 };
 
 export function getMoveDefinition (definitionId: number): MoveDefinition {

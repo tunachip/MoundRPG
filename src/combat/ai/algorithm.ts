@@ -2,13 +2,13 @@
 
 import type { Actor } from '../../actor/types.ts';
 import type { TemperamentTag } from '../../content/encounters/types.ts';
-import type { CombatState, CombatEntity, CombatMove } from '../state/index.ts';
+import type { CombatStateManager, CombatEntity, CombatMove } from '../state/index.ts';
 import type { DeclaredAction } from '../turn/index.ts';
 import type { CombatAiProfile } from './types.ts';
 import { expandDynamicPriorities, priorityWeight, scoreAttackPressure, scoreByTemperament, } from './rules.ts';
 
 function getValidTargets (
-	combat: CombatState,
+	combat: CombatStateManager,
 	casterIndex: number,
 ): Array<Actor> {
 	return combat.entities
@@ -18,7 +18,7 @@ function getValidTargets (
 }
 
 export function createAiActions (
-	combat: CombatState,
+	combat: CombatStateManager,
 	casterIndex: number,
 	profile: CombatAiProfile,
 ): Array<DeclaredAction> {
@@ -146,7 +146,7 @@ export function createAiProfile (
 
 function resolveMaxChainActions (
 	profile: CombatAiProfile,
-	combat?: CombatState,
+	combat?: CombatStateManager,
 	caster?: CombatEntity,
 ): number {
 	if (profile.maxChainActions !== undefined) {
@@ -179,7 +179,7 @@ function maxActionsForEnergy (
 }
 
 function pickMoveIndexByTemperament (
-	combat: CombatState,
+	combat: CombatStateManager,
 	caster: CombatEntity,
 	enemyTargets: Array<Actor>,
 	moveIndexes: Array<number>,
@@ -214,7 +214,7 @@ function pickMoveIndexByTemperament (
 }
 
 function scoreMoveByPriorities (
-	combat: CombatState,
+	combat: CombatStateManager,
 	caster: CombatEntity,
 	enemyTargets: Array<Actor>,
 	move: CombatMove,
@@ -245,7 +245,7 @@ function scoreMoveByPriorities (
 }
 
 function pickTargetsByTemperament (
-	combat: CombatState,
+	combat: CombatStateManager,
 	caster: CombatEntity,
 	enemyTargets: Array<Actor>,
 	move: CombatMove,

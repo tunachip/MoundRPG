@@ -39,14 +39,3 @@ export function createTextBox (
 
 	return root;
 }
-
-const mount = document.querySelector('main');
-if (mount) {
-	mount.appendChild(
-		createTextBox({
-			title: 'Player',
-			lines: ['HP: 24/24', 'Energy: 2/6'],
-			variant: 'cutout',
-		})
-	);
-}

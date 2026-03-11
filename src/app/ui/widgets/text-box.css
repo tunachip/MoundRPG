@@ -1,39 +1,64 @@
 body {
 	font-family: monospace;
 	font-size: 16px;
-	background-color: #000022;
+	background-image: url("../../../content/images/volcano.jpeg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 90vh;
+	width: 90vw;
 	color: white;
-}
-
-p {
-	font-family: monospace;
-	color: white;
-	margin: 0;
 }
 
 .textbox {
-	background-color: black;
+	white-space: pre-wrap;
+	background-color: #000000ff;
 	position: relative;
 	border: 2px solid white;
 	border-radius: 5px;
-	margin: 20px;
 	padding-left: 20px;
 	padding-right: 20px;
+	width: 100%;
+}
+
+.textbox p {
+	font-family: monospace;
+	margin: 0;
 }
 
 .textbox-title {
 	font-size: 20px;
-	background-color: black;
+	display: inline-block;
 	line-height: 1;
 	padding-left: 5px;
 	padding-right: 5px;
 	position: absolute;
 	top: -0.5em;
 	left: 1rem;
+	z-index: 1;
+}
+
+.textbox-title::before {
+	content: '';
+	position: absolute;
+	left: -4px;
+	right: -4px;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 6px;
+	background-color: #000000ff;
+	z-index: 0;
 }
 
 .textbox-title-text {
-	color: cyan;
+	color: white;
+	position: relative;
+	z-index: 1;
+	-webkit-text-stroke: 1px black;
+	text-shadow:
+		1px 0 0 black,
+		-1px 0 0 black,
+		0 1px 0 black,
+		0 -1px 0 black;
 }
 
 .textbox-contents {

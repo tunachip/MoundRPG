@@ -32,7 +32,8 @@ export const RollTide: MoveDefinition = {
 			{ operation: 'applyAttunement',
 				args: {
 					targetType: 'entity',
-					target: 'caster'
+					target: 'caster',
+					element: 'meta',
 				},
 			},
 		],

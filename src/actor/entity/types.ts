@@ -5,6 +5,11 @@ import { Inventory } from '../item/index.ts';
 import { Move } from '../move/index.ts';
 import { Blessing } from '../blessing/index.ts';
 
+export interface MoveMatrix {
+	active: Array<Move>;
+	banked: Array<Move>;
+}
+
 export interface Entity {
 	name:			 string;
 	level:		 number;
@@ -14,8 +19,9 @@ export interface Entity {
 	maxHp:		 number;
 	energy:		 number;
 	maxEnergy: number;
-	moves:		 Array<Move>;
+	moves:		 MoveMatrix;
 	blessings: Array<Blessing>;
 	inventory: Inventory;
 	definitionId?: number;
+	companions?: Array<Entity>;
 }

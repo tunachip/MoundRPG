@@ -34,7 +34,9 @@ export const Cultures = [
 
 export const EntityTypes = [
 	'player',
+	'companion',
 	'encounter',
+	'summoned',
 	'elite',
 ] as const;
 
@@ -113,6 +115,7 @@ export const ActionTypes = [
 ] as const;
 
 export const OpCodes = [
+	'summonEntity',
 	'attack',
 	'heal',
 	'raiseMaxHp',

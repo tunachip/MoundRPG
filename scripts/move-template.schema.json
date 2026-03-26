@@ -1,0 +1,207 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "type",
+    "element",
+    "speed",
+    "canChain",
+    "baseDamage",
+    "baseIterations",
+    "operations"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["attack", "utility"]
+    },
+    "element": {
+      "type": "string",
+      "enum": ["water", "stone", "fire", "plant", "vital", "force", "thunder"]
+    },
+    "speed": {
+      "type": "string",
+      "enum": ["slow", "normal", "quick"]
+    },
+    "canChain": {
+      "type": "boolean"
+    },
+    "baseDamage": {
+      "type": "integer"
+    },
+    "baseIterations": {
+      "type": "integer"
+    },
+    "operations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fromActive", "fromBanked", "whileActive"],
+      "properties": {
+        "fromActive": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/operation"
+          }
+        },
+        "fromBanked": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/operation"
+          }
+        },
+        "whileActive": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["trigger", "operations"],
+            "properties": {
+              "trigger": {
+                "type": "string",
+                "enum": [
+                  "pre:applyAttunement",
+                  "pre:negateAttunement",
+                  "pre:spendAttunement",
+                  "pre:entity:death",
+                  "pre:entity:attunementBlock",
+                  "pre:entity:fullHeal",
+                  "pre:entity:attacked",
+                  "pre:move:leaveCooldown",
+                  "pre:move:enterCooldown",
+                  "entity:hp:gained",
+                  "entity:hp:lost",
+                  "entity:maxHp:raised",
+                  "entity:maxHp:lowered",
+                  "entity:energy:gained",
+                  "entity:energy:lost",
+                  "entity:maxEnergy:raised",
+                  "entity:maxEnergy:lowered",
+                  "entity:attunement:gained",
+                  "entity:attunement:lost",
+                  "entity:status:gained",
+                  "entity:status:lost",
+                  "entity:ignoresStatus:gained",
+                  "entity:ignoresStatus:lost",
+                  "entity:maxStatusTurns:raised",
+                  "entity:maxStatusTurns:lowered",
+                  "entity:curseRisk:gained",
+                  "entity:curseRisk:lost",
+                  "move:cooldown:gained",
+                  "move:cooldown:lost",
+                  "listener:activated",
+                  "listener:deactivated",
+                  "post:entity:death",
+                  "post:entity:fullHeal",
+                  "post:entity:attunementBlock",
+                  "post:move:leaveCooldown",
+                  "post:move:enterCooldown",
+                  "pre:executeTurn"
+                ]
+              },
+              "operations": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/operation"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operation", "args"],
+      "properties": {
+        "operation": {
+          "type": "string",
+          "enum": [
+            "attack",
+            "heal",
+            "raiseMaxHp",
+            "lowerMaxHp",
+            "applyAttunement",
+            "negateAttunement",
+            "spendAttunement",
+            "applyCurseRisk",
+            "reduceCurseRisk",
+            "negateCurseRisk",
+            "spendCurseRisk",
+            "applyEnergy",
+            "reduceEnergy",
+            "negateEnergy",
+            "spendEnergy",
+            "raiseMaxEnergy",
+            "lowerMaxEnergy",
+            "applyStatus",
+            "reduceStatus",
+            "negateStatus",
+            "spendStatus",
+            "applyIgnoresStatus",
+            "negateIgnoresStatus",
+            "applyCooldown",
+            "reduceCooldown",
+            "negateCooldown",
+            "spendCooldown",
+            "raiseMaxStatusTurns",
+            "lowerMaxStatusTurns"
+          ]
+        },
+        "args": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["targetType"],
+          "properties": {
+            "targetCountRange": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["min", "max"],
+              "properties": {
+                "min": { "type": "integer" },
+                "max": { "type": "integer" }
+              }
+            },
+            "target": {
+              "type": "string",
+              "enum": ["caster", "chosen", "random", "self"]
+            },
+            "targetType": {
+              "type": "string",
+              "enum": ["entity", "move", "blessing", "listener"]
+            },
+            "element": {
+              "type": "string",
+              "enum": ["meta", "water", "stone", "fire", "plant", "vital", "force", "thunder"]
+            },
+            "status": {
+              "type": "string",
+              "enum": ["burn", "decay", "wound", "regen", "curse", "slow", "quick", "tough", "strong", "sleep", "stun", "anger"]
+            },
+            "amount": {
+              "type": "integer"
+            },
+            "baseDamage": {
+              "anyOf": [
+                { "type": "integer" },
+                { "type": "string", "enum": ["meta"] }
+              ]
+            },
+            "baseIterations": {
+              "anyOf": [
+                { "type": "integer" },
+                { "type": "string", "enum": ["meta"] }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

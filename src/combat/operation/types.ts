@@ -1,10 +1,12 @@
 // src/combat/operation/types.ts
 
 import type { CombatStateManager } from '../state/index.ts';
+import type { CombatRow } from '../state/index.ts';
 import type { DamageElement, Status, EventTrigger, OpCode } from '../../shared/types.ts';
 import type { EmitterEvent } from '../emitter/types.ts';
 import type { Condition } from '../condition/types.ts';
 import type { Actor } from '../../actor/types.ts';
+import type { Entity } from '../../actor/entity/types.ts';
 
 export interface Operation {
 	name: OpCode;
@@ -27,6 +29,12 @@ export interface OperationContext {
 	amount?: number;
 	baseDamage?: number;
 	calculatedDamage?: DamageResult;
+	summon?: {
+		entity?: Entity;
+		definitionId?: number;
+		row: CombatRow;
+		position?: number;
+	};
 }
 
 interface Change {

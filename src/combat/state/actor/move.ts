@@ -7,11 +7,11 @@ export interface CombatMove {
 	name: string;
 	ownerIndex: number;
 	isActive: boolean;
+	isBound: boolean;
+	canChain: boolean;
 	type: MoveType;
 	element: DamageElement;
 	speed: Speed;
-	isBound: boolean;
-	canChain: boolean;
 	operations: OperationMatrix;
 	cooldownTurns: number;
 	listeners: ListenerIndexMatrix;

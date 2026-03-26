@@ -16,6 +16,8 @@ export interface OperationContext {
 	element?: DamageElement;
 	status?: Status;
 	amount?: number;
+	position?: number;
 	baseDamage?: number;
 	calculatedDamage?: number;
+	templateId?: number;
 }

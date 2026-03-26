@@ -17,6 +17,7 @@ export interface AiRuleContext {
 }
 
 type TemperamentRule = (ctx: AiRuleContext) => number;
+type AttunementElement = keyof CombatEntity['attunedTo'];
 
 export const TemperamentRules: Record<TemperamentTag, TemperamentRule> = {
 	'utilitarian': ({ move }) =>
@@ -73,15 +74,15 @@ export const TemperamentRules: Record<TemperamentTag, TemperamentRule> = {
 	'earlybird': (ctx) => {
 		if (ctx.combat.turn < 3) {
 			return scoreAttackPressure(
-			  ctx.combat,
-			  ctx.enemyTargets,
-			  ctx.move.element
+				ctx.combat,
+				ctx.enemyTargets,
+				ctx.move.element
 			) + 0.7;
 		}
 		return scoreDefensePressure(
-		  ctx.combat,
-		  ctx.caster,
-		  ctx.move.element
+			ctx.combat,
+			ctx.caster,
+			ctx.move.element
 		) + 0.7;
 	},
 	'frugal': ({ chainIndex }) =>
@@ -107,17 +108,17 @@ export function scoreAttackPressure (
 	for (const target of enemyTargets) {
 		const enemy = combat.entities[target.index];
 		for (const weak of rules.weakTo) {
-			if (enemy.attunedTo[weak]) {
+			if (hasAttunement(enemy.attunedTo, weak)) {
 				score += 1.5;
 			}
 		}
 		for (const blockedBy of rules.blocks) {
-			if (enemy.attunedTo[blockedBy]) {
+			if (hasAttunement(enemy.attunedTo, blockedBy)) {
 				score -= 2;
 			}
 		}
 		for (const resistedBy of rules.resists) {
-			if (enemy.attunedTo[resistedBy]) {
+			if (hasAttunement(enemy.attunedTo, resistedBy)) {
 				score -= 0.8;
 			}
 		}
@@ -191,6 +192,14 @@ function findEnemyActiveAttackElements (
 		}
 	}
 	return elements;
+}
+
+function hasAttunement (
+	attunedTo: CombatEntity['attunedTo'],
+	element: DamageElement,
+): boolean {
+	return element in attunedTo
+		&& attunedTo[element as AttunementElement];
 }
 
 function resolveOperations (

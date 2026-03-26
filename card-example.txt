@@ -1,0 +1,35 @@
++---------------------+
+|	Move Name           |		<-- User Creates The Move By Filling out Fields on the Card
++---------------------+
+|                     |
+|                     |
+|                     |
+|                     |		<-- User Draws on this canvas to make testing-art (Using a simple paint-tool)
+|                     |
+|                     |
++---------------------+
+| Basic Readout       |		<-- User Creates a Human-Friendly Description Here
+| Of The Move Effect  |
+| Made for Humans     |		<-- Color of the Move determined by the metadata element
++---------------------+
+| Folded Details      |		<-- User Fills out the Move Template Here Explicitly
++---------------------+
+
+
+
++---------------------+
+|	Entity Name         |		<-- User Creates The Entity By Filling out Fields on the Card
++---------------------+
+|                     |
+|                     |
+|                     |
+|                     |		<-- User Draws on this canvas to make testing-art (Using a simple paint-tool)
+|                     |
+|                     |
++---------------------+
+| HP: 20/20           |		<-- Basic Readout of these Metadata Fields
+| EN: 00/06           |
+| EntityType: summon  |
++---------------------+
+| Folded Details      |		<-- User Fills out the Entity Template Here Explicitly
++---------------------+

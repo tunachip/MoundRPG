@@ -1,0 +1,198 @@
+:root {
+	--bg: #e4e4e4;
+	--panel: #f5f5f5;
+	--board: #c8c8c8;
+	--line: #b7b7b7;
+	--ink: #111111;
+	--muted: #666666;
+	font-family: 'Segoe UI', sans-serif;
+	color: var(--ink);
+	background: var(--bg);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+}
+
+main {
+	min-height: 100vh;
+	padding: 18px;
+}
+
+.lite-shell {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 380px;
+	gap: 18px;
+	min-height: calc(100vh - 36px);
+}
+
+.lite-board-wrap,
+.lite-panel {
+	border: 1px solid var(--line);
+	border-radius: 8px;
+	background: var(--panel);
+}
+
+.lite-board-wrap {
+	padding: 14px;
+}
+
+.lite-board {
+	position: relative;
+	min-height: 820px;
+	border: 1px solid var(--line);
+	border-radius: 8px;
+	background:
+		linear-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+		var(--board);
+	background-size: 36px 36px, 36px 36px, auto;
+}
+
+.lite-card {
+	position: absolute;
+	left: 60px;
+	top: 60px;
+	width: 340px;
+	border: 1px solid #222222;
+	border-radius: 6px;
+	background: #ffffff;
+	color: #111111;
+	overflow: hidden;
+}
+
+.lite-card-header,
+.lite-card-section {
+	padding: 10px 12px;
+	border-bottom: 1px solid #d0d0d0;
+}
+
+.lite-card-header {
+	background: #f6f6f6;
+	font-weight: 600;
+}
+
+.lite-card-canvas-wrap {
+	padding: 10px;
+	border-bottom: 1px solid #d0d0d0;
+}
+
+.lite-card-canvas {
+	display: block;
+	width: 100%;
+	height: auto;
+	border: 1px solid #cccccc;
+	border-radius: 4px;
+	background: #fafafa;
+	touch-action: none;
+}
+
+.lite-stats {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 8px;
+	font-size: 0.9rem;
+}
+
+.lite-stats strong {
+	display: block;
+	font-size: 0.75rem;
+	color: var(--muted);
+	text-transform: uppercase;
+}
+
+.lite-panel {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	padding: 16px;
+}
+
+.lite-panel h1,
+.lite-panel h2 {
+	margin: 0;
+}
+
+.lite-form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.lite-form label {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	font-size: 0.92rem;
+}
+
+.lite-form input,
+.lite-form select,
+.lite-form textarea,
+.lite-form button {
+	font: inherit;
+}
+
+.lite-form input,
+.lite-form select,
+.lite-form textarea {
+	padding: 8px 10px;
+	border: 1px solid var(--line);
+	border-radius: 4px;
+	background: #ffffff;
+}
+
+.lite-form textarea {
+	min-height: 96px;
+	resize: vertical;
+}
+
+.lite-row {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
+}
+
+.lite-actions {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
+}
+
+.lite-actions button,
+.paint-tools button {
+	padding: 10px 12px;
+	border: 1px solid var(--line);
+	border-radius: 4px;
+	background: #ffffff;
+	cursor: pointer;
+}
+
+.paint-tools {
+	display: flex;
+	gap: 8px;
+}
+
+.status-box,
+.template-box {
+	padding: 10px 12px;
+	border: 1px solid var(--line);
+	border-radius: 4px;
+	background: #ffffff;
+	white-space: pre-wrap;
+}
+
+@media (max-width: 1100px) {
+	.lite-shell {
+		grid-template-columns: 1fr;
+	}
+
+	.lite-board {
+		min-height: 620px;
+	}
+}

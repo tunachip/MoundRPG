@@ -13,5 +13,6 @@ export * from './listener.ts';
 export * from './logic.ts';
 export * from './registry.ts';
 export * from './status.ts';
+export * from './summon.ts';
 export * from './tick.ts';
 export * from './types.ts';

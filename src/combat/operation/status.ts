@@ -99,6 +99,38 @@ export function spendStatus (
 	return result;
 }
 
+export function applyIgnoresStatus (
+	ctx: OperationContext
+): OperationResult {
+	const result: OperationResult = { breaks: false };
+	const status = requireCtxStatus(ctx, 'applyIgnoresStatus');
+	forEachTargetEntity(ctx, (target, targetActor) => {
+		target.ignoresStatus[status] = true;
+		result.triggers ??= [];
+		result.triggers.push({
+			trigger: 'entity:ignoresStatus:gained',
+			actors: [targetActor],
+		});
+	});
+	return result;
+}
+
+export function negateIgnoresStatus (
+	ctx: OperationContext
+): OperationResult {
+	const result: OperationResult = { breaks: false };
+	const status = requireCtxStatus(ctx, 'negateIgnoresStatus');
+	forEachTargetEntity(ctx, (target, targetActor) => {
+		target.ignoresStatus[status] = false;
+		result.triggers ??= [];
+		result.triggers.push({
+			trigger: 'entity:ignoresStatus:lost',
+			actors: [targetActor],
+		});
+	});
+	return result;
+}
+
 export function raiseMaxStatusTurns (
 	ctx: OperationContext
 ): OperationResult {

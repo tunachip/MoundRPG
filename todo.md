@@ -13,8 +13,24 @@
 ## Notes
 
 ```
+New Systems:
+1. Companion Entities
+Limited Move-Pool Entities which fight in combat & offer upgrade-abilities
 
+Example:
 
+'Fire Keeper'
+[HP: 10/10]
+Moves:
+  'Kindle Fire':
+    extend 1 burn. if target attuned to plant, repeat.
+  'Hot Shot':
+    deal 1 fire damage. Heat 1. Overheat: Apply 1 Burn to target.
+Non-Combat Effects:
+  Player may Sacrifice Items for Essence during Upgrade Screen
 
+2. Summoned Entities
+Agentic Entities which you Summon with Moves
 
+examples available in docs
 ```

@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "vite --config vite.config.ts",
     "build": "vite build --config vite.config.ts",
-    "preview": "vite preview --config vite.config.ts"
+    "preview": "vite preview --config vite.config.ts",
+    "serve:maker-lite": "node scripts/serve-maker-lite.mjs"
   },
   "repository": {
     "type": "git",
